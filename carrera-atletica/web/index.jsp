@@ -46,7 +46,7 @@ if(session.getAttribute("userNameSystemUser") == null){%>
         <body>
             <nav class="white teal darken-1" role="navigation">
                 <div class="nav-wrapper container">
-                    <a id="logo-container" href="http://10.10.10.23/carrera-atletica/" class="brand-logo teal-text darken-3 circulo" style="font-size: 30px; font-style: italic; padding-left: 5px; font-weight: bolder;">
+                    <a id="logo-container" href="/carrera-atletica/" class="brand-logo teal-text darken-3 circulo" style="font-size: 30px; font-style: italic; padding-left: 5px; font-weight: bolder;">
                         <span class="strech">U<span style="font-size: 40px;">T</span></span>
                     </a>
                     <a id="logo2-container" href="#" class="brand-logo right teal-text darken-3 circulo" style="font-size: 30px; font-style: italic; padding-left: 5px; font-weight: bolder;">
@@ -418,5 +418,5 @@ if(session.getAttribute("userNameSystemUser") == null){%>
         </body>
     </html>
 <%}else{
-    response.sendRedirect("http://10.10.10.23/carrera-atletica/onlyAuthorizedAccess/");
+    response.sendRedirect("/carrera-atletica/onlyAuthorizedAccess/");
 }%>

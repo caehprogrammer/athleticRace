@@ -37,70 +37,319 @@ if(session.getAttribute("userNameSystemUser") != null){%>
                     display: inline-block;
                     height: 20%;
                 }
-                .modal.modal-fixed-footer{
-                    height: 360px;
-                }
             </style>
         </head>
         <body>
             <nav class="white teal darken-1" role="navigation">
                 <div class="nav-wrapper container">
-                    <a id="logo-container" href="http://10.10.10.23/carrera-atletica/" class="brand-logo teal-text darken-3 circulo" style="font-size: 30px; font-style: italic; padding-left: 5px; font-weight: bolder;">
+                    <a id="logo-container" href="/carrera-atletica/" class="brand-logo teal-text darken-3 circulo" style="font-size: 30px; font-style: italic; padding-left: 5px; font-weight: bolder;">
                         <span class="strech">U<span style="font-size: 40px;">T</span></span>
                     </a>
                     <a id="logo2-container" href="#" class="brand-logo right teal-text darken-3 circulo" style="font-size: 30px; font-style: italic; padding-left: 5px; font-weight: bolder;">
                         <span class="strech">U<span style="font-size: 40px;">T</span></span>
                     </a>
                     <ul class="right hide-on-med-and-down" style="margin-right: 100px">
-                        <li><a href="http://10.10.10.23/carrera-atletica/serviceSystemUsers" class="white-text lighten-5 modal-trigger">SALIR</a></li>
+                        <li><a class="dropdown-button white-text lighten-5" href="#!" data-activates="dropdown1">PARTICIPANTES<i class="material-icons right">arrow_drop_down</i></a></li>
+                        
+                        <li><a href="/carrera-atletica/serviceSystemUsers" class="white-text lighten-5">SALIR</a></li>
                     </ul>
-
+                    <!-- Dropdown Structure -->
+                    <ul id="dropdown1" class="dropdown-content">
+                        <li><a href="#newParticipant" class="modal-trigger">NUEVO</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#updateParticipant" class="modal-trigger">MODIFICAR</a></li>                        
+                    </ul>
                     <ul id="nav-mobile" class="side-nav teal darken-1">
-                        <li><a href="http://10.10.10.23/carrera-atletica/serviceSystemUsers" class="white-text lighten-5 modal-trigger">SALIR</a></li>
+                        <li><a href="/carrera-atletica/serviceSystemUsers" class="white-text lighten-5">SALIR</a></li>
                     </ul>
                     <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
                 </div>
             </nav>
             <div>
-                <div style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); top: 152.884px;" id="login" class="modal modal-fixed-footer">
+                <div style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); top: 152.884px;" id="newParticipant" class="modal modal-fixed-footer">
                     <div class="teal darken-1" style="top: 0px; height: 32px; text-align: center">
-                        <span class="header center white-text text-darken-2" style="font-size: 18px; font-weight: bolder">Iniciar Sesión</span>
-                    </div>
-                    <form id="form-login" class="" lang="es" action="#" method="POST">
-                        <div class="modal-content">
-                            <div class="row" style="margin-bottom: 0px">
+                        <span class="header center white-text text-darken-2" style="font-size: 18px; font-weight: bolder">Agregar a un nuevo participante</span>
+                    </div>  
+                    <div id="step-1">
+                        <form id="form-new-participant" class="" lang="es" action="#" method="POST">
+                            <input type="hidden" name="data_pk_participant" value="0">
+                            <div class="modal-content">
                                 <div class="row">
-                                    <div class="input-field col s12">
-                                        <input id="email" type="email" name="userName" class="validate" required="" data-errormessage-value-missing="Please input something">
-                                        <label for="email">Correo Electrónico</label>
+                                    <div class="input-field col s4">
+                                        <input name="data_name" type="text" class="validate" required="">
+                                        <label for="data_name">Nombre *</label>
+                                    </div>
+                                    <div class="input-field col s4">
+                                        <input name="data_patern_name" type="text" class="validate" required="">
+                                        <label for="data_patern_name">Apellido paterno</label>
+                                    </div>
+                                    <div class="input-field col s4">
+                                        <input name="data_matern_name" type="text" class="validate" required="">
+                                        <label for="data_matern_name">Apellido materno</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <input name="data_mail" type="email" class="validate">
+                                        <label for="data_mail">Email</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <input name="data_cell_phone" type="tel" class="validate">
+                                        <label for="data_cell_phone">Teléfono Celular</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s6">       
+                                        <input  name="data_date_born" class="datepicker" type="text" required="">
+                                        <label for="data_date_born">Fecha de nacimiento *</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <select name="data_gender" required="">
+                                            <option value="1" selected>Hombre</option>
+                                            <option value="2">Mujer</option>
+                                        </select>
+                                        <label for="data_gender">Sexo *</label>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="data_age" value="0"/>
+                                <div class="row">
+                                    <div class="input-field col s4">
+                                        <select name="data_distance" required="">
+                                            <option value="3">3 Km</option>
+                                            <option value="5" selected>5 Km</option>
+                                        </select>
+                                        <label for="data_distance">Distancia *</label>
+                                    </div>
+                                    <div class="input-field col s8">
+                                        <select name="data_category" required="" class="validate">
+                                            <option value="Libre" selected>Libre</option>
+                                        </select>
+                                        <label for="data_category">Categoria *</label>
+                                    </div>
+                                </div>       
+                                <div class="row">
+                                    <div class="input-field col s4">
+                                        <input name="data_ticket_number" type="number" maxlength="3" minlength="3" min="0" max="30000" class="validate" required="">
+                                        <label for="data_ticket_number">Número de boleto *</label>
+                                    </div>
+                                    <div class="input-field col s4">
+                                        <input name="data_competitor_number" placeholder="000" readonly="" type="number" maxlength="3" minlength="3" min="0" max="30000" required="">
+                                        <label for="data_competitor_number">Número de competidor *</label>
+                                    </div>
+                                    <div class="input-field col s4">
+                                        <select name="data_size_tshirt" required="">
+                                            <option value="grande" selected>Grande</option>
+                                            <option value="mediana">Mediana</option>
+                                            <option value="chica">Chica</option>
+                                            <option value="unitalla">Unitalla</option>
+                                        </select>
+                                        <label for="data_size_tshirt">Talla de la playera *</label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <input id="password" name="password" type="password" class="validate" required="">
-                                        <label for="password">Contraseña</label>
+                                        <select name="data_fk_institution" required="">
+                                            <option value="1" selected>Universidad Tecnológica del Sur del Estado de México</option>
+                                        </select>
+                                        <label for="data_fk_institution">Institución *</label>
+                                    </div>
+                                </div>   
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <textarea name="data_observations"  class="materialize-textarea" length="120"></textarea>
+                                        <label for="data_observations">Observaciones</label>
                                     </div>
                                 </div>
+                            </div>     
+
+                            <div class="modal-footer teal darken-1">
+                                <div class="preloader-wrapper small active loading" style="display: none; width: 27px; height: 27px; margin: 9px; float: left;">
+                                    <div class="spinner-layer spinner-yellow-only">
+                                        <div class="circle-clipper left">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="gap-patch">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="circle-clipper right">
+                                            <div class="circle"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="message" class="center" style="margin-left: 9px; display: inline-block; float: left; margin-top: 7px;"></div> 
+                                <button style="padding: 5px" class="modal-action modal-close waves-effect waves-teal btn-flat white  btn waves-effect waves-light" name="action">Cancelar
+                                    <i class="material-icons right">replay</i>
+                                </button>
+                                <button style="margin-right: 10px; padding: 5px" class="waves-effect waves-teal btn-flat white  btn waves-effect waves-light " id="sendNewParticipant" type="submit" >Agregar
+                                    <i class="material-icons right">send</i>
+                                </button>
                             </div>
-                            <div id="message" class="center"></div>
-
-                            <div class="progress" style="display: none">
-                                <div class="indeterminate"></div>
-                            </div>  
-                        </div>                
-
+                        </form>
+                    </div>
+                    <div id="step-2" style="display: none">
+                        <div class="modal-content">
+                            <h1 class="center teal-text text-darken-2">Finalmente...</h1>
+                            <div class="card-panel teal">
+                                <span class="white-text">
+                                    Para terminar con el proceso de inscripción es necesario exportar el acta responsiva para que el participante la firme.
+                                </span>
+                            </div>
+                        </div>                    
                         <div class="modal-footer teal darken-1">
-
-                            <button style="padding: 5px" class="modal-action modal-close waves-effect waves-teal btn-flat white  btn waves-effect waves-light" name="action">Cancelar
-                                <i class="material-icons right">replay</i>
-                            </button>
-                            <button style="margin-right: 10px; padding: 5px" class="waves-effect waves-teal btn-flat white  btn waves-effect waves-light" id="send" type="button" >Entrar
-                                <i class="material-icons right">send</i>
+                            <div class="preloader-wrapper small active loading" style="display: none; width: 27px; height: 27px; margin: 9px; float: left;">
+                                <div class="spinner-layer spinner-yellow-only">
+                                    <div class="circle-clipper left">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="gap-patch">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                    </div>
+                                </div>
+                            </div> 
+                            <button style="margin-right: 10px; padding: 5px" class="waves-effect waves-teal btn-flat white  btn waves-effect waves-light sendToPDF" type="button" >Exportar a PDF
+                                <i class="material-icons right">print</i>
                             </button>
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>      
+            </div>
+            <div>
+                <div style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); top: 152.884px;" id="updateParticipant" class="modal modal-fixed-footer">
+                    <div class="teal darken-1" style="top: 0px; height: 32px; text-align: center">
+                        <span class="header center white-text text-darken-2" style="font-size: 18px; font-weight: bolder">Modificar algún participante</span>
+                    </div>  
+                    <div id="step-1">
+                        <form id="form-update-participant" class="" lang="es" action="#" method="POST">
+                            <input type="hidden" name="data_pk_participant" value="0">
+                            <div class="modal-content">
+                                <div class="row">
+                                    <div class="input-field col s8">
+                                        <input id="data_ticket_number" name="data_ticket_number" type="number" maxlength="3" minlength="3" min="0" max="30000" class="validate" required="">
+                                        <label for="data_ticket_number">Número de boleto *</label>
+                                        <button  class="waves-effect waves-teal btn-flat teal  btn waves-effect waves-light " id="sendSearchParticipant" type="button" >BUSCAR
+                                            <i class="material-icons right">send</i>
+                                        </button>
+                                    </div>
+                                    <div class="input-field col s4" style="display: none">
+                                        <input name="data_competitor_number" placeholder="000" readonly="" type="number" maxlength="3" minlength="3" min="0" max="30000" required="">
+                                        <label for="data_competitor_number">Número de competidor *</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <li class="divider"></li>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s4">
+                                        <input name="data_name" type="text" class="validate" required="">
+                                        <label for="data_name">Nombre *</label>
+                                    </div>
+                                    <div class="input-field col s4">
+                                        <input name="data_patern_name" type="text" class="validate" required="">
+                                        <label for="data_patern_name">Apellido paterno</label>
+                                    </div>
+                                    <div class="input-field col s4">
+                                        <input name="data_matern_name" type="text" class="validate" required="">
+                                        <label for="data_matern_name">Apellido materno</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <input name="data_mail" type="email" class="validate">
+                                        <label for="data_mail">Email</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <input name="data_cell_phone" type="tel" class="validate">
+                                        <label for="data_cell_phone">Teléfono Celular</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s6">       
+                                        <input  name="data_date_born" class="datepicker" type="text" required="">
+                                        <label for="data_date_born">Fecha de nacimiento *</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <select name="data_gender" required="">
+                                            <option value="1" selected>Hombre</option>
+                                            <option value="2">Mujer</option>
+                                        </select>
+                                        <label for="data_gender">Sexo *</label>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="data_age" value="0"/>
+                                <div class="row">
+                                    <div class="input-field col s4">
+                                        <select name="data_distance" required="">
+                                            <option value="3">3 Km</option>
+                                            <option value="5" selected>5 Km</option>
+                                        </select>
+                                        <label for="data_distance">Distancia *</label>
+                                    </div>
+                                    <div class="input-field col s4">
+                                        <select name="data_category" required="" class="validate">
+                                            <option value="Libre" selected>Libre</option>
+                                        </select>
+                                        <label for="data_category">Categoria *</label>
+                                    </div>
+                                    <div class="input-field col s4">
+                                        <select name="data_size_tshirt" required="">
+                                            <option value="grande" selected>Grande</option>
+                                            <option value="mediana">Mediana</option>
+                                            <option value="chica">Chica</option>
+                                            <option value="unitalla">Unitalla</option>
+                                        </select>
+                                        <label for="data_size_tshirt">Talla de la playera *</label>
+                                    </div>
+                                </div>     
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <select name="data_fk_institution" required="">
+                                            <option value="1" selected>Universidad Tecnológica del Sur del Estado de México</option>
+                                        </select>
+                                        <label for="data_fk_institution">Institución *</label>
+                                    </div>
+                                </div>   
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <textarea name="data_observations"  class="materialize-textarea" length="120"></textarea>
+                                        <label for="data_observations">Observaciones</label>
+                                    </div>
+                                </div>
+                            </div>     
+
+                            <div class="modal-footer teal darken-1">
+                                <div class="preloader-wrapper small active loading" style="display: none; width: 27px; height: 27px; margin: 9px; float: left;">
+                                    <div class="spinner-layer spinner-yellow-only">
+                                        <div class="circle-clipper left">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="gap-patch">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="circle-clipper right">
+                                            <div class="circle"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="message" class="center" style="margin-left: 9px; display: inline-block; float: left; margin-top: 7px;"></div> 
+                                <button style="padding: 5px" class="modal-action modal-close waves-effect waves-teal btn-flat white  btn waves-effect waves-light" name="action">Cancelar
+                                    <i class="material-icons right">replay</i>
+                                </button>
+                                <button style="margin-right: 10px; padding: 5px" class="waves-effect waves-teal btn-flat white  btn waves-effect waves-light " id="sendUpdateParticipant" type="submit" >Guardar Cambios
+                                    <i class="material-icons right">send</i>
+                                </button>
+                                <button style="margin-right: 10px; padding: 5px" class="waves-effect waves-teal btn-flat white  btn waves-effect waves-light sendToLastPDF" type="button" >Exportar a PDF
+                                    <i class="material-icons right">print</i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <div id="index-banner" class="parallax-container">
                 <div class="">
                     <div class="container">
@@ -378,7 +627,15 @@ if(session.getAttribute("userNameSystemUser") != null){%>
             <script>
                 $(document).ready(function(){
                     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-                    $('.modal-trigger').leanModal();
+                    $('.modal-trigger').leanModal({
+                        dismissible: false
+                    });
+                    $('.datepicker').pickadate({
+                        selectMonths: true, // Creates a dropdown to control month
+                        selectYears: 90 // Creates a dropdown of 15 years to control year
+                    });
+                    $('select').material_select();
+      
                 });
             </script>
             <script type="text/javascript">
@@ -417,5 +674,5 @@ if(session.getAttribute("userNameSystemUser") != null){%>
         </body>
     </html>
 <%}else{
-    response.sendRedirect("http://10.10.10.23/carrera-atletica/");
+    response.sendRedirect("/carrera-atletica/");
 }%>

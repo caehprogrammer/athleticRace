@@ -31,11 +31,107 @@ public class serviceParticipants extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
+     * @param date
      * @param request servlet request
      * @param response servlet response
+     * @return 
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    protected String convertDate(String date){
+        String dateFormatMysql;
+        String[] numerosComoArray = date.split(",");
+        switch (numerosComoArray[1].replace(" ", "")) {
+            case "Enero":
+                dateFormatMysql = numerosComoArray[2]+"-01-"+numerosComoArray[0];
+                break;
+            case "Febrero":
+                dateFormatMysql = numerosComoArray[2]+"-02-"+numerosComoArray[0];
+                break;
+            case "Marzo":
+                dateFormatMysql = numerosComoArray[2]+"-03-"+numerosComoArray[0];
+                break;
+            case "Abril":
+                dateFormatMysql = numerosComoArray[2]+"-04-"+numerosComoArray[0];
+                break;
+            case "Mayo":
+                dateFormatMysql = numerosComoArray[2]+"-05-"+numerosComoArray[0];
+                break;
+            case "Junio":
+                dateFormatMysql = numerosComoArray[2]+"-06-"+numerosComoArray[0];
+                break;
+            case "Julio":
+                dateFormatMysql = numerosComoArray[2]+"-07-"+numerosComoArray[0];
+                break;
+            case "Agosto":
+                dateFormatMysql = numerosComoArray[2]+"-08-"+numerosComoArray[0];
+                break;
+            case "Septiembre":
+                dateFormatMysql = numerosComoArray[2]+"-09-"+numerosComoArray[0];
+                break;
+            case "Octubre":
+                dateFormatMysql = numerosComoArray[2]+"-10-"+numerosComoArray[0];
+                break;
+            case "Noviembre":
+                dateFormatMysql = numerosComoArray[2]+"-11-"+numerosComoArray[0];
+                break;
+            case "Diciembre":
+                dateFormatMysql = numerosComoArray[2]+"-12-"+numerosComoArray[0];
+                break;
+            default:
+                dateFormatMysql = "0000-00-00";
+                break;
+        }
+        dateFormatMysql = dateFormatMysql.replace(" ", "");
+        return dateFormatMysql;
+    }
+    protected String convertDateString(String date){
+        String dateFormatMysql;
+        String[] numerosComoArray = date.split(",");
+        switch (numerosComoArray[1].replace(" ", "")) {
+            case "01":
+                dateFormatMysql = numerosComoArray[0]+", Enero, "+numerosComoArray[2];
+                break;
+            case "02":
+                dateFormatMysql = numerosComoArray[0]+", Febrero, "+numerosComoArray[2];
+                break;
+            case "03":
+                dateFormatMysql = numerosComoArray[0]+", Marzo, "+numerosComoArray[2];
+                break;
+            case "04":
+                dateFormatMysql = numerosComoArray[0]+", Abril, "+numerosComoArray[2];
+                break;
+            case "05":
+                dateFormatMysql = numerosComoArray[0]+", Mayo, "+numerosComoArray[2];
+                break;
+            case "06":
+                dateFormatMysql = numerosComoArray[0]+", Junio, "+numerosComoArray[2];
+                break;
+            case "07":
+                dateFormatMysql = numerosComoArray[0]+", Julio, "+numerosComoArray[2];
+                break;
+            case "08":
+                dateFormatMysql = numerosComoArray[0]+", Agosto, "+numerosComoArray[2];
+                break;
+            case "09":
+                dateFormatMysql = numerosComoArray[0]+", Septiembre, "+numerosComoArray[2];
+                break;
+            case "10":
+                dateFormatMysql = numerosComoArray[0]+", Octubre, "+numerosComoArray[2];
+                break;
+            case "11":
+                dateFormatMysql = numerosComoArray[0]+", Noviembre, "+numerosComoArray[2];
+                break;
+            case "12":
+                dateFormatMysql = numerosComoArray[0]+", Diciembre, "+numerosComoArray[2];
+                break;
+            default:
+                dateFormatMysql = "0000-00-00";
+                break;
+        }
+        dateFormatMysql = dateFormatMysql.replace(" ", "");
+        return dateFormatMysql;
+    }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -92,50 +188,54 @@ public class serviceParticipants extends HttpServlet {
                     }
                     settings.put("__ENTITIES", content);
                     principal.add(settings);
-                    response.setContentType("application/json"); 
                     out.print(principal);
                     out.flush(); 
                     out.close();
                 }
                 if(request.getParameter("insert")!=null){
-                    participantsModel dataParticipants=new participantsModel();
                     
-                    pk_participant = Integer.parseInt(request.getParameter("data_pk_participant"));
-                    fl_name = request.getParameter("data_name");
-                    fl_patern_name = request.getParameter("data_patern_name");
-                    fl_matern_name = request.getParameter("data_matern_name");
-                    fl_mail = request.getParameter("data_mail");
-                    fl_cell_phone = request.getParameter("data_cell_phone");
-                    fl_date_born = request.getParameter("data_date_born");
-                    fl_age = Integer.parseInt(request.getParameter("data_age"));
-                    fl_gender = Integer.parseInt(request.getParameter("data_gender"));
-                    fl_distance = Integer.parseInt(request.getParameter("data_distance"));
-                    fl_category = request.getParameter("data_category");
-                    fl_competitor_number = Integer.parseInt(request.getParameter("data_competitor_number"));
-                    fl_ticket_number = Integer.parseInt(request.getParameter("data_ticket_number"));
-                    fl_size_tshirt = request.getParameter("data_size_tshirt");
-                    fk_institution = Integer.parseInt(request.getParameter("data_fk_institution"));
-                    fl_observations = request.getParameter("data_observations");
-                    
-                    dataParticipants.setPk_participant(pk_participant);
-                    dataParticipants.setFl_name(fl_name);
-                    dataParticipants.setFl_patern_name(fl_patern_name);                    
-                    dataParticipants.setFl_matern_name(fl_matern_name);                    
-                    dataParticipants.setFl_mail(fl_mail);                    
-                    dataParticipants.setFl_cell_phone(fl_cell_phone);                    
-                    dataParticipants.setFl_date_born(fl_date_born);
-                    dataParticipants.setFl_age(fl_age);                    
-                    dataParticipants.setFl_gender(fl_gender);                    
-                    dataParticipants.setFl_distance(fl_distance);                    
-                    dataParticipants.setFl_category(fl_category);                    
-                    dataParticipants.setFl_competitor_number(fl_competitor_number);                    
-                    dataParticipants.setFl_ticket_number(fl_ticket_number);                    
-                    dataParticipants.setFl_size_tshirt(fl_size_tshirt);                    
-                    dataParticipants.setFk_institution(fk_institution);                    
-                    dataParticipants.setFl_observations(fl_observations);
-                    
-                    dataOut.put("result", new participantsControl().InsertParticipant(dataParticipants));
-                    out.print(dataOut);             
+                    try {
+                        participantsModel dataParticipants=new participantsModel();
+                        
+//                        pk_participant = Integer.parseInt(request.getParameter("data_pk_participant"));
+                        fl_name = request.getParameter("data_name");
+                        fl_patern_name = request.getParameter("data_patern_name");
+                        fl_matern_name = request.getParameter("data_matern_name");
+                        fl_mail = request.getParameter("data_mail");
+                        fl_cell_phone = request.getParameter("data_cell_phone");
+                        fl_date_born = convertDate(request.getParameter("data_date_born"));
+//                        fl_age = Integer.parseInt(request.getParameter("data_age"));
+                        fl_gender = Integer.parseInt(request.getParameter("data_gender"));
+                        fl_distance = Integer.parseInt(request.getParameter("data_distance"));
+                        fl_category = request.getParameter("data_category");
+                        fl_competitor_number = Integer.parseInt(request.getParameter("data_competitor_number"));
+                        fl_ticket_number = Integer.parseInt(request.getParameter("data_ticket_number"));
+                        fl_size_tshirt = request.getParameter("data_size_tshirt");
+                        fk_institution = Integer.parseInt(request.getParameter("data_fk_institution"));
+                        fl_observations = request.getParameter("data_observations");
+
+//                        dataParticipants.setPk_participant(pk_participant);
+                        dataParticipants.setFl_name(fl_name);
+                        dataParticipants.setFl_patern_name(fl_patern_name);                    
+                        dataParticipants.setFl_matern_name(fl_matern_name);                    
+                        dataParticipants.setFl_mail(fl_mail);                    
+                        dataParticipants.setFl_cell_phone(fl_cell_phone);                    
+                        dataParticipants.setFl_date_born(fl_date_born);
+//                        dataParticipants.setFl_age(fl_age);                    
+                        dataParticipants.setFl_gender(fl_gender);                    
+                        dataParticipants.setFl_distance(fl_distance);                    
+                        dataParticipants.setFl_category(fl_category);                    
+                        dataParticipants.setFl_competitor_number(fl_competitor_number);                    
+                        dataParticipants.setFl_ticket_number(fl_ticket_number);                    
+                        dataParticipants.setFl_size_tshirt(fl_size_tshirt);                    
+                        dataParticipants.setFk_institution(fk_institution);                    
+                        dataParticipants.setFl_observations(fl_observations);
+
+                        dataOut.put("result", new participantsControl().InsertParticipant(dataParticipants));    
+                    } catch (Exception e) {
+                        dataOut.put("result", "0");
+                    }              
+                    out.print(dataOut);
                 }
                 if(request.getParameter("update")!=null){      
                     if(request.getParameter("pt_Pk_participant") != null){
@@ -146,7 +246,7 @@ public class serviceParticipants extends HttpServlet {
                         fl_matern_name = request.getParameter("data_matern_name");
                         fl_mail = request.getParameter("data_mail");
                         fl_cell_phone = request.getParameter("data_cell_phone");
-                        fl_date_born = request.getParameter("data_date_born");
+                        fl_date_born = convertDate(request.getParameter("data_date_born"));
                         fl_age = Integer.parseInt(request.getParameter("data_age"));
                         fl_gender = Integer.parseInt(request.getParameter("data_gender"));
                         fl_distance = Integer.parseInt(request.getParameter("data_distance"));
