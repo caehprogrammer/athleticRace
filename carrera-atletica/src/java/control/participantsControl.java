@@ -62,9 +62,9 @@ public class participantsControl {
         }
         return list;
     }
-    public ArrayList<participantsModel> SelectParticipant(){
+    public ArrayList<participantsModel> SelectParticipant(int pt_competitor_number){
         ArrayList<participantsModel> list=new ArrayList<>();
-        procedure="";
+        procedure="CALL `GET_PARTICIPANS`('byCompetitorNumber', "+pt_competitor_number+")";
         try {
             try (Connection conn = new connectionControl().getConexion(); PreparedStatement ps = conn.prepareStatement(procedure); ResultSet res = ps.executeQuery()) {
                 while(res!=null&&res.next()){

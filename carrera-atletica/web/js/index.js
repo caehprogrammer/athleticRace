@@ -68,11 +68,11 @@ $(document).ready(function (){
                             $('#step-2').fadeIn();                        
                         }else{
                             if(data.result.indexOf("for key 'fl_mail'")>=0){
-                                $("#message").html("<span  class='chip header center red-text text-darken-2'>El correo electónico ya esta en uso<i class='material-icons'>close</i></span>");
+                                $("#message").html("<span  class='chip header center red-text text-darken-2'>El correo electónico ya está en uso<i class='material-icons'>close</i></span>");
                             }else if(data.result.indexOf("for key 'fl_ticket_number'")>=0){
-                                $("#message").html("<span  class='chip header center red-text text-darken-2'>El número de boleto ya esta en uso<i class='material-icons'>close</i></span>");
+                                $("#message").html("<span  class='chip header center red-text text-darken-2'>El número de boleto ya está en uso<i class='material-icons'>close</i></span>");
                             }else if(data.result.indexOf("for key 'fl_competitor_number'")>=0){
-                               $("#message").html("<span  class='chip header center red-text text-darken-2'>El número de competidor ya esta en uso<i class='material-icons'>close</i></span>"); 
+                               $("#message").html("<span  class='chip header center red-text text-darken-2'>El número de competidor ya está en uso<i class='material-icons'>close</i></span>"); 
                             }else if(data.result.indexOf("0")>=0){
                                 $("#message").html("<span  class='chip header center red-text text-darken-2'>Ocurrió un problema verifica que estén correctos los datos<i class='material-icons'>close</i></span>"); 
                             }
@@ -147,6 +147,77 @@ $(document).ready(function (){
                 alert("Error interno del servidor");                
             }
         });
+    }
+    
+    ////////////////////////////////////////////////////////////////////////
+    $("a[href='#updateParticipant']").click(function (){
+        $("#form-update-participant input[class!='select-dropdown']").each(function (){
+            $(this).val("");
+        });
+        $("#form-update-participant textarea").val("");
+        disableField();
+    });
+    
+    function disableField(){
+        $("#data_ticket_number").val("");
+        $("#form-update-participant input[name!='data_ticket_number']").each(function (){
+            $(this).attr("disabled", true); 
+        });
+        $("#form-update-participant textarea").attr("disabled", true); 
+        $("#sendUpdateParticipant").attr("disabled", true); 
+        $(".sendToLastPDF").attr("disabled", true); 
+    }   
+    
+    $("#sendSearchParticipant").click(function (){
+        var competitor_number = $("#data_ticket_number").val();
+        if(competitor_number.length>0){
+            $.ajax({
+                url: "/carrera-atletica/serviceParticipants?select=one",
+                data: { 
+                    "pt_competitor_number": competitor_number
+                },
+                type: 'POST',
+                beforeSend: function (xhr) {
+                },
+                success: function (data, textStatus, jqXHR) {
+                    fieldsFillIn(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert("Error interno del servidor");                
+                }
+            });
+        }else{
+            
+        }      
+    });
+    function fieldsFillIn(data){
+        var rootData = data[0];
+        rootData = rootData["__ENTITIES"];
+        rootData = rootData[0];
+        console.log(rootData);
+        if(rootData){
+            console.log(rootData);
+            $("[name='data_name']").val(rootData.getFl_name);
+            $("[name='data_patern_name']").val(rootData.getFl_patern_name);
+            $("[name='data_matern_name']").val(rootData.getFl_matern_name);
+            $("[name='data_mail']").val(rootData.getFl_mail);
+            $("[name='data_cell_phone']").val(rootData.getFl_cell_phone);
+            $("[name='data_date_born']").val(rootData.getFl_date_born);
+            $("[name='data_gender']").val(rootData.getFl_gender);
+            $("[name='data_name']").val(rootData.getFl_distance);
+            $("[name='data_name']").val(rootData.getFl_category);
+            $("[name='data_name']").val(rootData.getFl_size_tshirt);
+            $("[name='data_name']").val(rootData.getFk_institution);
+            $("[name='data_observations']").val(rootData.getFl_observations);
+            $(".sendToLastPDF").attr("disabled", false);
+        }else{
+            $("#form-update-participant input[class!='select-dropdown']").each(function (){
+                $(this).val("");
+            });
+            $("#form-update-participant textarea").val("");
+            $(".sendToLastPDF").attr("disabled", true);
+            console.log("Row not found");
+        }
     }
 });
 

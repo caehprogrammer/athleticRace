@@ -163,8 +163,27 @@ public class serviceParticipants extends HttpServlet {
                     JSONObject settings = new JSONObject();
                     JSONArray content = new JSONArray();
                     settings.put("__participantsModel","Participants");
-                    listParticipants = new participantsControl().SelectParticipants("allParticipants"); 
+                    if(request.getParameter("select").equals("one")){
+                        int pt_competitor_number = Integer.parseInt(request.getParameter("pt_competitor_number"));
+                        listParticipants = new participantsControl().SelectParticipant(pt_competitor_number);
+                    }else{
+                        listParticipants = new participantsControl().SelectParticipants("allParticipants"); 
+                    }
                     for(int i=0;i<listParticipants.size();i++){
+                        String gender, distance, institution="";
+                        if(listParticipants.get(i).getFl_gender()==1){
+                            gender="Hombre";
+                        }else{
+                            gender="Mujer";
+                        }
+                        if(listParticipants.get(i).getFl_distance()==3){
+                            distance="3 Km";
+                        }else{
+                            distance="5 Km";
+                        }
+                        if(listParticipants.get(i).getFk_institution()==1){
+                            distance="Universidad Tecnológica del Sur del Estado de México";
+                        }
                         JSONObject data = new JSONObject();
                         data.put("getProgresivNumber", i+1);
                         data.put("getPk_participant", listParticipants.get(i).getPk_participant());
@@ -175,14 +194,14 @@ public class serviceParticipants extends HttpServlet {
                         data.put("getFl_cell_phone", listParticipants.get(i).getFl_cell_phone() );
                         data.put("getFl_date_born", listParticipants.get(i).getFl_date_born() );
                         data.put("getFl_age", listParticipants.get(i).getFl_age() );
-                        data.put("getFl_gender", listParticipants.get(i).getFl_gender() );
-                        data.put("getFl_distance", listParticipants.get(i).getFl_distance() );
+                        data.put("getFl_gender", gender );
+                        data.put("getFl_distance", distance );
                         data.put("getFl_category", listParticipants.get(i).getFl_category() );
                         data.put("getFl_competitor_number", listParticipants.get(i).getFl_competitor_number() );        
                         data.put("getFl_ticket_number", listParticipants.get(i).getFl_ticket_number() );      
                         data.put("getFl_date_register", listParticipants.get(i).getFl_date_register() );
                         data.put("getFl_size_tshirt", listParticipants.get(i).getFl_size_tshirt() );
-                        data.put("getFk_institution", listParticipants.get(i).getFk_institution() );
+                        data.put("getFk_institution", institution );
                         data.put("getFl_observations", listParticipants.get(i).getFl_observations());        
                         content.add(data); 
                     }
@@ -251,8 +270,8 @@ public class serviceParticipants extends HttpServlet {
                         fl_gender = Integer.parseInt(request.getParameter("data_gender"));
                         fl_distance = Integer.parseInt(request.getParameter("data_distance"));
                         fl_category = request.getParameter("data_category");
-                        fl_competitor_number = Integer.parseInt(request.getParameter("data_competitor_number"));
-                        fl_ticket_number = Integer.parseInt(request.getParameter("data_ticket_number"));
+//                        fl_competitor_number = Integer.parseInt(request.getParameter("data_competitor_number"));
+//                        fl_ticket_number = Integer.parseInt(request.getParameter("data_ticket_number"));
                         fl_size_tshirt = request.getParameter("data_size_tshirt");
                         fk_institution = Integer.parseInt(request.getParameter("data_fk_institution"));
                         fl_observations = request.getParameter("data_observations");
@@ -268,8 +287,8 @@ public class serviceParticipants extends HttpServlet {
                         dataParticipants.setFl_gender(fl_gender);                    
                         dataParticipants.setFl_distance(fl_distance);                    
                         dataParticipants.setFl_category(fl_category);                    
-                        dataParticipants.setFl_competitor_number(fl_competitor_number);                    
-                        dataParticipants.setFl_ticket_number(fl_ticket_number);                    
+//                        dataParticipants.setFl_competitor_number(fl_competitor_number);                    
+//                        dataParticipants.setFl_ticket_number(fl_ticket_number);                    
                         dataParticipants.setFl_size_tshirt(fl_size_tshirt);                    
                         dataParticipants.setFk_institution(fk_institution);                    
                         dataParticipants.setFl_observations(fl_observations);

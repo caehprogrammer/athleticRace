@@ -18,7 +18,7 @@
 	<field name="fl_date_born" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="fl_age" class="java.lang.Long">
+	<field name="fl_age" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="fl_gender" class="java.lang.String">
@@ -34,7 +34,7 @@
 	<field name="fl_distance" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="fl_competitor_number" class="java.lang.Integer">
+	<field name="fl_competitor_number" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
@@ -61,6 +61,10 @@
 	</pageHeader>
 	<detail>
 		<band height="627" splitType="Stretch">
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement stretchType="RelativeToBandHeight" x="-45" y="483" width="610" height="144" uuid="b9144e2c-bf7a-486e-a1d8-f6fef80c128a"/>
+				<imageExpression><![CDATA["footnote.png"]]></imageExpression>
+			</image>
 			<staticText>
 				<reportElement x="0" y="23" width="542" height="23" uuid="dc7014a6-3f99-4922-986d-62de616b538a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -82,23 +86,8 @@
 				</textElement>
 				<text><![CDATA[CELEBRANDO EL XXV ANIVERSARIO DE LAS UNIVERSIDADES TECNOLÓGICAS DE MÉXICO]]></text>
 			</staticText>
-			<image hAlign="Center" vAlign="Middle">
-				<reportElement stretchType="RelativeToBandHeight" x="-45" y="483" width="610" height="144" uuid="b9144e2c-bf7a-486e-a1d8-f6fef80c128a"/>
-				<imageExpression><![CDATA["footnote.png"]]></imageExpression>
-			</image>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="170" y="531" width="196" height="26" uuid="0ba7c04a-c433-4e7d-88fd-4f728b38afb4"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Nombre y firma del participante
-]]></text>
-			</staticText>
-			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="0" y="306" width="542" height="211" uuid="421c2061-3a3f-4cbc-99b7-aa83e3e74748"/>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="297" width="542" height="198" uuid="421c2061-3a3f-4cbc-99b7-aa83e3e74748"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
 					<font fontName="SansSerif" size="9" isBold="false"/>
 				</textElement>
@@ -220,7 +209,7 @@ Hora de salida: 7:00 am
 				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
 					<font fontName="SansSerif" size="9" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{fl_age}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{fl_age}+" Años"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement stretchType="RelativeToBandHeight" x="26" y="170" width="516" height="16" uuid="84056744-5213-4141-9736-285b6c937681"/>
@@ -263,6 +252,36 @@ Hora de salida: 7:00 am
 					<font fontName="SansSerif" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fl_competitor_number}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="EEEEE dd MMMMM yyyy">
+				<reportElement stretchType="RelativeToBandHeight" x="438" y="495" width="104" height="20" uuid="b9f67b08-4ab1-4208-886d-7d41e18f8ff3"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="353" y="495" width="85" height="20" uuid="6d5f2784-8907-4d0e-8594-ed05b58517be"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tejupilco, México;]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="167" y="537" width="196" height="26" uuid="0ba7c04a-c433-4e7d-88fd-4f728b38afb4"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre y firma del participante
+]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="167" y="521" width="196" height="16" uuid="179c9c95-cbe8-4b0b-9e51-c05e515ec233"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fl_name}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

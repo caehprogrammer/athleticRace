@@ -122,7 +122,7 @@ if(session.getAttribute("userNameSystemUser") == null){%>
                         <!-- Modal Structure -->
                         <div id="modal1" class="modal">
                             <div class="modal-content">
-                                <h4 class="header center blue-grey-text text-darken-2">!Upsss...!</h4>
+                                <h4 class="header center blue-grey-text text-darken-2">¡Upsss...!</h4>
                                 <p style="display: inherit; font-size: 24px; font-weight: bolder;" class="header center teal-text text-darken-2">
                                     Para realizar este proceso es necesario acudir a la Universidad Tecnológica del Sur del Estado de México
                                 </p>
@@ -176,21 +176,21 @@ if(session.getAttribute("userNameSystemUser") == null){%>
                                     <li class="collection-item avatar">
                                         <i class="material-icons teal-text" style="font-size: 26px">grade</i>
                                         <span class="title blue-grey-text text-darken-2" style="font-size: 26px; font-weight: bolder;">Inicio</span>
-                                        <div class="title blue-grey-text text-darken-2" style="padding-left: 41px; font-size: 15px; font-weight: bolder;">Unidad deportiva de Tejupilco</div>
+                                        <div class="title blue-grey-text text-darken-2" style="padding-left: 41px; font-size: 15px; font-weight: bolder;">Unidad Deportiva de Tejupilco</div>
                                     </li>
                                     <li class="collection-item avatar">
                                        <i class="material-icons teal-text" style="font-size: 26px">grade</i>
                                         <span class="title blue-grey-text text-darken-2" style="font-size: 26px; font-weight: bolder;">Hora de salida</span>
-                                        <div class="title blue-grey-text text-darken-2" style="padding-left: 41px; font-size: 15px; font-weight: bolder;">7:00 a.m</div>
+                                        <div class="title blue-grey-text text-darken-2" style="padding-left: 41px; font-size: 15px; font-weight: bolder;">7:30 a.m</div>
                                     </li>
                                     <li class="collection-item avatar">
                                         <i class="material-icons teal-text" style="font-size: 26px">grade</i>
                                         <span class="title blue-grey-text text-darken-2" style="font-size: 26px; font-weight: bolder;">Kilómetros</span>
-                                        <div class="title blue-grey-text text-darken-2" style="padding-left: 41px; font-size: 15px; font-weight: bolder;">3 Km & 5 Km</div>
+                                        <div class="title blue-grey-text text-darken-2" style="padding-left: 41px; font-size: 15px; font-weight: bolder;">5 Km</div>
                                     </li>
                                     <li class="collection-item avatar">
                                         <i class="material-icons teal-text" style="font-size: 26px">grade</i>
-                                        <span class="title blue-grey-text text-darken-2" style="font-size: 26px; font-weight: bolder;">Cuerpo</span>
+                                        <span class="title blue-grey-text text-darken-2" style="font-size: 26px; font-weight: bolder;">Cupo</span>
                                         <div class="title blue-grey-text text-darken-2" style="padding-left: 41px; font-size: 15px; font-weight: bolder;">Limitado a 700 corredores</div>
                                     </li>
                                     <li class="collection-item avatar">
@@ -222,7 +222,7 @@ if(session.getAttribute("userNameSystemUser") == null){%>
                                             </div>
                                             <div class="card-reveal">
                                                 <span class="card-title teal-text text-darken-2">Croquis de recorrido<i class="material-icons right">close</i></span>
-                                                <p>Inicio: Unidad deportiva de tejupilco</p>
+                                                <p>Inicio: Unidad Deportiva de Tejupilco</p>
                                                 <p>Meta: Precidencia Municipal</p>
                                             </div>
                                         </div>
@@ -260,7 +260,7 @@ if(session.getAttribute("userNameSystemUser") == null){%>
                         <div class="col s12 m4">
                             <div class="icon-block">
                                   <h2 class="center teal-text"><img src="imgs/trophy.png" style="width: 80px" alt="trophy"/></h2>
-                                  <h1 class="header center blue-grey-text text-darken-2">2er Lugar</h1>          
+                                  <h1 class="header center blue-grey-text text-darken-2">2do Lugar</h1>          
                             </div>
                         </div>
                         <div class="col s12 m4">
@@ -306,7 +306,7 @@ if(session.getAttribute("userNameSystemUser") == null){%>
                                     </div>
 
                                     <div class="col s12 m4">
-                                        <a href="https://twitter.com/utsemtejupilco">
+                                        <a href="https://twitter.com/utsemtejupilco" target="blanck">
                                             <div class="icon-block">
                                                 <img src="imgs/twiter.png" alt="Twitter" />
                                                 <h5 class="center">Twitter</h5>
@@ -350,14 +350,14 @@ if(session.getAttribute("userNameSystemUser") == null){%>
                                 <tbody>
                                     <tr>
                                         <td align="right" valign="middle" width="48%" style="text-align: right;">Gobierno del Estado de México<br>
-                                            Secretaria de Educación<br>
-                                            Universidad Tecnológica Del Sur Del Estado de México
+                                            Secretaría de Educación<br>
+                                            Universidad Tecnológica del Sur del Estado de México
                                         </td>
                                         <td width="1%">&nbsp;</td>
-                                        <td align="left" valign="middle" width="50%">Carretera Tejupilco - Amatepec Km. 12.5 Ex - Hacienda de San Miguel
-                                            Ixtapan, Tejupilco, Méx. <br>
-                                            Teléfonos: (724) 2694020, ext 220, 225&nbsp;<br>
-                                            E-mail:&nbsp; utsem.difusion@utsem.edu.mx
+                                        <td align="left" valign="middle" width="50%">Carretera Tejupilco - Amatepec Km. 12 SN Localidad de San Miguel
+                                            Ixtapan, Tejupilco, Estado de México, C.P 51426 <br>
+                                            Teléfonos: (01724)-269-40-16 al 22 Ext. 230 y 225<br>
+                                            E-mail: utsem.difusion@utsem.edu.mx Y culturaydeporte@utsem.edu.mx
                                         </td>
                                     </tr>
                                 </tbody>
@@ -372,7 +372,7 @@ if(session.getAttribute("userNameSystemUser") == null){%>
                 </div>
             </footer>
             <!--  Scripts-->
-            <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+            <script src="js/code.jquery.com_jquery-2.1.1.min.js" type="text/javascript"></script>
             <script src="js/materialize.js"></script>
             <script src="js/init.js"></script>
             <script src="js/index.js" type="text/javascript"></script>
@@ -401,14 +401,14 @@ if(session.getAttribute("userNameSystemUser") == null){%>
                         diferencia=diferencia-(60*minutos);
                         segundos=Math.floor(diferencia);
 
-                        $(id).html('<span class="element">' + dias + ' dias </span><span class="element">' + horas + ' horas </span><span class="element">' + minutos + ' minutos </span><span class="element">' + segundos + ' segundos...</span>');
+                        $(id).html('<span class="element">' + dias + ' días </span><span class="element">' + horas + ' horas </span><span class="element">' + minutos + ' minutos </span><span class="element">' + segundos + ' segundos...</span>');
 
                         if (dias>0 || horas>0 || minutos>0 || segundos>0){
                                 setTimeout("countdown('"+id+"')",1000);
                         }
                     }
                     else{
-                        $(id).html('<span class="element">' + dias + ' dias</span><span class="element">' + horas + ' horas</span><span class="element">' + minutos + ' minutos</span><span class="element">' + segundos + ' segundos...</span>');
+                        $(id).html('<span class="element">' + dias + ' días</span><span class="element">' + horas + ' horas</span><span class="element">' + minutos + ' minutos</span><span class="element">' + segundos + ' segundos...</span>');
                     }
                 }
                 $(window).load(function(){

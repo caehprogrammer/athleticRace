@@ -59,10 +59,10 @@ if(session.getAttribute("userNameSystemUser") != null){%>
                         <li class="divider"></li>
                         <li><a href="#updateParticipant" class="modal-trigger">MODIFICAR</a></li>                        
                     </ul>
-                    <ul id="nav-mobile" class="side-nav teal darken-1">
+<!--                    <ul id="nav-mobile" class="side-nav teal darken-1">
                         <li><a href="/carrera-atletica/serviceSystemUsers" class="white-text lighten-5">SALIR</a></li>
-                    </ul>
-                    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+                    </ul>-->
+                    <!--<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>-->
                 </div>
             </nav>
             <div>
@@ -91,7 +91,7 @@ if(session.getAttribute("userNameSystemUser") != null){%>
                                 <div class="row">
                                     <div class="input-field col s6">
                                         <input name="data_mail" type="email" class="validate">
-                                        <label for="data_mail">Email</label>
+                                        <label for="data_mail">E-mail</label>
                                     </div>
                                     <div class="input-field col s6">
                                         <input name="data_cell_phone" type="tel" class="validate">
@@ -124,7 +124,7 @@ if(session.getAttribute("userNameSystemUser") != null){%>
                                         <select name="data_category" required="" class="validate">
                                             <option value="Libre" selected>Libre</option>
                                         </select>
-                                        <label for="data_category">Categoria *</label>
+                                        <label for="data_category">Categoría *</label>
                                     </div>
                                 </div>       
                                 <div class="row">
@@ -138,10 +138,9 @@ if(session.getAttribute("userNameSystemUser") != null){%>
                                     </div>
                                     <div class="input-field col s4">
                                         <select name="data_size_tshirt" required="">
-                                            <option value="grande" selected>Grande</option>
-                                            <option value="mediana">Mediana</option>
-                                            <option value="chica">Chica</option>
-                                            <option value="unitalla">Unitalla</option>
+                                            <option value="Chica">Chica</option>
+                                            <option value="Mediana">Mediana</option>
+                                            <option value="Grande" selected>Grande</option>  
                                         </select>
                                         <label for="data_size_tshirt">Talla de la playera *</label>
                                     </div>
@@ -245,35 +244,35 @@ if(session.getAttribute("userNameSystemUser") != null){%>
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s4">
-                                        <input name="data_name" type="text" class="validate" required="">
+                                        <input placeholder="" name="data_name" type="text" class="validate" required="">
                                         <label for="data_name">Nombre *</label>
                                     </div>
                                     <div class="input-field col s4">
-                                        <input name="data_patern_name" type="text" class="validate" required="">
+                                        <input placeholder=""  name="data_patern_name" type="text" class="validate" >
                                         <label for="data_patern_name">Apellido paterno</label>
                                     </div>
                                     <div class="input-field col s4">
-                                        <input name="data_matern_name" type="text" class="validate" required="">
+                                        <input placeholder=""  name="data_matern_name" type="text" class="validate" >
                                         <label for="data_matern_name">Apellido materno</label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s6">
-                                        <input name="data_mail" type="email" class="validate">
-                                        <label for="data_mail">Email</label>
+                                        <input placeholder=""  name="data_mail" type="email" class="validate">
+                                        <label for="data_mail">E-mail</label>
                                     </div>
                                     <div class="input-field col s6">
-                                        <input name="data_cell_phone" type="tel" class="validate">
+                                        <input placeholder=""  name="data_cell_phone" type="tel" class="validate">
                                         <label for="data_cell_phone">Teléfono Celular</label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s6">       
-                                        <input  name="data_date_born" class="datepicker" type="text" required="">
+                                        <input placeholder=""  name="data_date_born" class="datepicker" type="text" required="">
                                         <label for="data_date_born">Fecha de nacimiento *</label>
                                     </div>
                                     <div class="input-field col s6">
-                                        <select name="data_gender" required="">
+                                        <select id="data_gender" name="data_gender" required="">
                                             <option value="1" selected>Hombre</option>
                                             <option value="2">Mujer</option>
                                         </select>
@@ -293,14 +292,13 @@ if(session.getAttribute("userNameSystemUser") != null){%>
                                         <select name="data_category" required="" class="validate">
                                             <option value="Libre" selected>Libre</option>
                                         </select>
-                                        <label for="data_category">Categoria *</label>
+                                        <label for="data_category">Categoría *</label>
                                     </div>
                                     <div class="input-field col s4">
                                         <select name="data_size_tshirt" required="">
-                                            <option value="grande" selected>Grande</option>
-                                            <option value="mediana">Mediana</option>
-                                            <option value="chica">Chica</option>
-                                            <option value="unitalla">Unitalla</option>
+                                            <option value="Chica">Chica</option>
+                                            <option value="Mediana">Mediana</option>
+                                            <option value="Grande" selected>Grande</option>                                            
                                         </select>
                                         <label for="data_size_tshirt">Talla de la playera *</label>
                                     </div>
@@ -315,7 +313,7 @@ if(session.getAttribute("userNameSystemUser") != null){%>
                                 </div>   
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <textarea name="data_observations"  class="materialize-textarea" length="120"></textarea>
+                                        <textarea placeholder=""  name="data_observations"  class="materialize-textarea" length="120"></textarea>
                                         <label for="data_observations">Observaciones</label>
                                     </div>
                                 </div>
@@ -339,10 +337,10 @@ if(session.getAttribute("userNameSystemUser") != null){%>
                                 <button style="padding: 5px" class="modal-action modal-close waves-effect waves-teal btn-flat white  btn waves-effect waves-light" name="action">Cancelar
                                     <i class="material-icons right">replay</i>
                                 </button>
-                                <button style="margin-right: 10px; padding: 5px" class="waves-effect waves-teal btn-flat white  btn waves-effect waves-light " id="sendUpdateParticipant" type="submit" >Guardar Cambios
+<!--                                <button style="margin-right: 10px; padding: 5px"  disabled="" class="waves-effect waves-teal btn-flat white  btn waves-effect waves-light " id="sendUpdateParticipant" type="submit" >Guardar Cambios
                                     <i class="material-icons right">send</i>
-                                </button>
-                                <button style="margin-right: 10px; padding: 5px" class="waves-effect waves-teal btn-flat white  btn waves-effect waves-light sendToLastPDF" type="button" >Exportar a PDF
+                                </button>-->
+                                <button style="margin-right: 10px; padding: 5px"  disabled="" class="waves-effect waves-teal btn-flat white  btn waves-effect waves-light sendToLastPDF" type="button" >Exportar a PDF
                                     <i class="material-icons right">print</i>
                                 </button>
                             </div>
@@ -370,7 +368,7 @@ if(session.getAttribute("userNameSystemUser") != null){%>
                         <!-- Modal Structure -->
                         <div id="modal1" class="modal">
                             <div class="modal-content">
-                                <h4 class="header center blue-grey-text text-darken-2">!Upsss...!</h4>
+                                <h4 class="header center blue-grey-text text-darken-2">¡Upsss...!</h4>
                                 <p style="display: inherit; font-size: 24px; font-weight: bolder;" class="header center teal-text text-darken-2">
                                     Para realizar este proceso es necesario acudir a la Universidad Tecnológica del Sur del Estado de México
                                 </p>
@@ -424,21 +422,21 @@ if(session.getAttribute("userNameSystemUser") != null){%>
                                     <li class="collection-item avatar">
                                         <i class="material-icons teal-text" style="font-size: 26px">grade</i>
                                         <span class="title blue-grey-text text-darken-2" style="font-size: 26px; font-weight: bolder;">Inicio</span>
-                                        <div class="title blue-grey-text text-darken-2" style="padding-left: 41px; font-size: 15px; font-weight: bolder;">Unidad deportiva de Tejupilco</div>
+                                        <div class="title blue-grey-text text-darken-2" style="padding-left: 41px; font-size: 15px; font-weight: bolder;">Unidad Deportiva de Tejupilco</div>
                                     </li>
                                     <li class="collection-item avatar">
                                        <i class="material-icons teal-text" style="font-size: 26px">grade</i>
                                         <span class="title blue-grey-text text-darken-2" style="font-size: 26px; font-weight: bolder;">Hora de salida</span>
-                                        <div class="title blue-grey-text text-darken-2" style="padding-left: 41px; font-size: 15px; font-weight: bolder;">7:00 a.m</div>
+                                        <div class="title blue-grey-text text-darken-2" style="padding-left: 41px; font-size: 15px; font-weight: bolder;">7:30 a.m</div>
                                     </li>
                                     <li class="collection-item avatar">
                                         <i class="material-icons teal-text" style="font-size: 26px">grade</i>
                                         <span class="title blue-grey-text text-darken-2" style="font-size: 26px; font-weight: bolder;">Kilómetros</span>
-                                        <div class="title blue-grey-text text-darken-2" style="padding-left: 41px; font-size: 15px; font-weight: bolder;">3 Km & 5 Km</div>
+                                        <div class="title blue-grey-text text-darken-2" style="padding-left: 41px; font-size: 15px; font-weight: bolder;">5 Km</div>
                                     </li>
                                     <li class="collection-item avatar">
                                         <i class="material-icons teal-text" style="font-size: 26px">grade</i>
-                                        <span class="title blue-grey-text text-darken-2" style="font-size: 26px; font-weight: bolder;">Cuerpo</span>
+                                        <span class="title blue-grey-text text-darken-2" style="font-size: 26px; font-weight: bolder;">Cupo</span>
                                         <div class="title blue-grey-text text-darken-2" style="padding-left: 41px; font-size: 15px; font-weight: bolder;">Limitado a 700 corredores</div>
                                     </li>
                                     <li class="collection-item avatar">
@@ -470,7 +468,7 @@ if(session.getAttribute("userNameSystemUser") != null){%>
                                             </div>
                                             <div class="card-reveal">
                                                 <span class="card-title teal-text text-darken-2">Croquis de recorrido<i class="material-icons right">close</i></span>
-                                                <p>Inicio: Unidad deportiva de tejupilco</p>
+                                                <p>Inicio: Unidad Deportiva de Tejupilco</p>
                                                 <p>Meta: Precidencia Municipal</p>
                                             </div>
                                         </div>
@@ -508,7 +506,7 @@ if(session.getAttribute("userNameSystemUser") != null){%>
                         <div class="col s12 m4">
                             <div class="icon-block">
                                   <h2 class="center teal-text"><img src="../imgs/trophy.png" style="width: 80px" alt="trophy"/></h2>
-                                  <h1 class="header center blue-grey-text text-darken-2">2er Lugar</h1>          
+                                  <h1 class="header center blue-grey-text text-darken-2">2do Lugar</h1>          
                             </div>
                         </div>
                         <div class="col s12 m4">
@@ -598,14 +596,14 @@ if(session.getAttribute("userNameSystemUser") != null){%>
                                 <tbody>
                                     <tr>
                                         <td align="right" valign="middle" width="48%" style="text-align: right;">Gobierno del Estado de México<br>
-                                            Secretaria de Educación<br>
-                                            Universidad Tecnológica Del Sur Del Estado de México
+                                            Secretaría de Educación<br>
+                                            Universidad Tecnológica del Sur del Estado de México
                                         </td>
                                         <td width="1%">&nbsp;</td>
-                                        <td align="left" valign="middle" width="50%">Carretera Tejupilco - Amatepec Km. 12.5 Ex - Hacienda de San Miguel
-                                            Ixtapan, Tejupilco, Méx. <br>
-                                            Teléfonos: (724) 2694020, ext 220, 225&nbsp;<br>
-                                            E-mail:&nbsp; utsem.difusion@utsem.edu.mx
+                                        <td align="left" valign="middle" width="50%">Carretera Tejupilco - Amatepec Km. 12 SN Localidad de San Miguel
+                                            Ixtapan, Tejupilco, Estado de México, C.P 51426 <br>
+                                            Teléfonos: (01724)-269-40-16 al 22 Ext. 230 y 225<br>
+                                            E-mail: utsem.difusion@utsem.edu.mx Y culturaydeporte@utsem.edu.mx
                                         </td>
                                     </tr>
                                 </tbody>
@@ -620,7 +618,7 @@ if(session.getAttribute("userNameSystemUser") != null){%>
                 </div>
             </footer>
             <!--  Scripts-->
-            <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+            <script src="../js/code.jquery.com_jquery-2.1.1.min.js" type="text/javascript"></script>
             <script src="../js/materialize.js"></script>
             <script src="../js/init.js"></script>
             <script src="../js/index.js" type="text/javascript"></script>
@@ -657,14 +655,14 @@ if(session.getAttribute("userNameSystemUser") != null){%>
                         diferencia=diferencia-(60*minutos);
                         segundos=Math.floor(diferencia);
 
-                        $(id).html('<span class="element">' + dias + ' dias </span><span class="element">' + horas + ' horas </span><span class="element">' + minutos + ' minutos </span><span class="element">' + segundos + ' segundos...</span>');
+                        $(id).html('<span class="element">' + dias + ' días </span><span class="element">' + horas + ' horas </span><span class="element">' + minutos + ' minutos </span><span class="element">' + segundos + ' segundos...</span>');
 
                         if (dias>0 || horas>0 || minutos>0 || segundos>0){
                                 setTimeout("countdown('"+id+"')",1000);
                         }
                     }
                     else{
-                        $(id).html('<span class="element">' + dias + ' dias</span><span class="element">' + horas + ' horas</span><span class="element">' + minutos + ' minutos</span><span class="element">' + segundos + ' segundos...</span>');
+                        $(id).html('<span class="element">' + dias + ' días</span><span class="element">' + horas + ' horas</span><span class="element">' + minutos + ' minutos</span><span class="element">' + segundos + ' segundos...</span>');
                     }
                 }
                 $(window).load(function(){
