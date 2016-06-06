@@ -163,14 +163,18 @@ public class serviceParticipants extends HttpServlet {
                     JSONObject settings = new JSONObject();
                     JSONArray content = new JSONArray();
                     settings.put("__participantsModel","Participants");
+                    String gender, distance, institution="";
                     if(request.getParameter("select").equals("one")){
                         int pt_competitor_number = Integer.parseInt(request.getParameter("pt_competitor_number"));
                         listParticipants = new participantsControl().SelectParticipant(pt_competitor_number);
+                        institution = "one";
                     }else{
                         listParticipants = new participantsControl().SelectParticipants("allParticipants"); 
+                        
+                        
                     }
                     for(int i=0;i<listParticipants.size();i++){
-                        String gender, distance, institution="";
+                        
                         if(listParticipants.get(i).getFl_gender()==1){
                             gender="Hombre";
                         }else{
@@ -182,7 +186,11 @@ public class serviceParticipants extends HttpServlet {
                             distance="5 Km";
                         }
                         if(listParticipants.get(i).getFk_institution()==1){
-                            distance="Universidad Tecnológica del Sur del Estado de México";
+                            if(distance.equals("one")){
+                                institution="Universidad Tecnológica del Sur del Estado de México";
+                            }else{
+                                institution="UTSEM";
+                            }
                         }
                         JSONObject data = new JSONObject();
                         data.put("getProgresivNumber", i+1);

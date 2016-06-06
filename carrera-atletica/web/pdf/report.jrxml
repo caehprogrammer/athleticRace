@@ -7,8 +7,9 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[CALL `GET_PARTICIPANS`('pkParticipants', $P{pt_competitor_number})]]>
+		<![CDATA[CALL `GET_PARTICIPANS`('printReport', $P{pt_competitor_number})]]>
 	</queryString>
+	<field name="fl_date_print" class="java.lang.String"/>
 	<field name="pk_participant" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
@@ -24,7 +25,7 @@
 	<field name="fl_gender" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="fk_institution" class="java.lang.String">
+	<field name="fk_institution" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="fl_category" class="java.lang.String">
@@ -256,7 +257,7 @@ Hora de salida: 7:00 am
 			<textField isStretchWithOverflow="true" pattern="EEEEE dd MMMMM yyyy">
 				<reportElement stretchType="RelativeToBandHeight" x="438" y="495" width="104" height="20" uuid="b9f67b08-4ab1-4208-886d-7d41e18f8ff3"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{fl_date_print}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement stretchType="RelativeToBandHeight" x="353" y="495" width="85" height="20" uuid="6d5f2784-8907-4d0e-8594-ed05b58517be"/>

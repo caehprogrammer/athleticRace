@@ -13,12 +13,14 @@ if(session.getAttribute("userNameSystemUser") != null){%>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
             <title>Carrera Atlética</title>
-
+            <link href="../libraries/jqwidgets-ver4.1.2/jqwidgets/styles/jqx.base.css" rel="stylesheet" type="text/css"/>
+            <link href="../libraries/jqwidgets-ver4.1.2/jqwidgets/styles/jqx.teal.css" rel="stylesheet" type="text/css"/>
             <!-- CSS  -->
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
             <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
             <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
+            
             <style>
                 .circulo {
                     width: 60px;
@@ -57,7 +59,9 @@ if(session.getAttribute("userNameSystemUser") != null){%>
                     <ul id="dropdown1" class="dropdown-content">
                         <li><a href="#newParticipant" class="modal-trigger">NUEVO</a></li>
                         <li class="divider"></li>
-                        <li><a href="#updateParticipant" class="modal-trigger">MODIFICAR</a></li>                        
+                        <li><a href="#updateParticipant" class="modal-trigger">IMPRIMIR</a></li>     
+                        <li class="divider"></li>
+                        <li><a href="#rowsParticipants" class="modal-trigger">INSCRITOS</a></li>
                     </ul>
 <!--                    <ul id="nav-mobile" class="side-nav teal darken-1">
                         <li><a href="/carrera-atletica/serviceSystemUsers" class="white-text lighten-5">SALIR</a></li>
@@ -348,6 +352,19 @@ if(session.getAttribute("userNameSystemUser") != null){%>
                     </div>
                 </div>
             </div>
+            <div>
+                <div style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); width: 80%" id="rowsParticipants" class="modal modal-fixed-footer">
+                    <div class="teal darken-1" style="top: 0px; height: 32px; text-align: center">
+                        <span class="header center white-text text-darken-2" style="font-size: 18px; font-weight: bolder">Participantes Inscritos a la Carrera</span>
+                    </div>
+                    <div id="gridParticipants"></div>
+                    <div class="modal-footer teal darken-1">
+                        <button style="padding: 5px" class="modal-action modal-close waves-effect waves-teal btn-flat white  btn waves-effect waves-light" name="action">Cancelar
+                            <i class="material-icons right">replay</i>
+                        </button>
+                    </div>
+                </div>
+            </div>
             <div id="index-banner" class="parallax-container">
                 <div class="">
                     <div class="container">
@@ -622,6 +639,25 @@ if(session.getAttribute("userNameSystemUser") != null){%>
             <script src="../js/materialize.js"></script>
             <script src="../js/init.js"></script>
             <script src="../js/index.js" type="text/javascript"></script>
+            <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxcore.js" type="text/javascript"></script>
+            <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxbuttons.js" type="text/javascript"></script>
+            <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxtooltip.js" type="text/javascript"></script>
+            <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxscrollbar.js" type="text/javascript"></script>
+            <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxmenu.js" type="text/javascript"></script>
+            <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxlistbox.js" type="text/javascript"></script>
+            <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxdropdownlist.js" type="text/javascript"></script>
+            <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxgrid.js" type="text/javascript"></script>
+            <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxgrid.sort.js" type="text/javascript"></script>
+            <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxgrid.selection.js" type="text/javascript"></script>
+            <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxgrid.columnsresize.js" type="text/javascript"></script>
+            <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxdata.js" type="text/javascript"></script>
+            <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxdata.export.js" type="text/javascript"></script>
+            <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxgrid.export.js" type="text/javascript"></script>            
+            <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxgrid.pager.js" type="text/javascript"></script>
+            <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxgrid.aggregates.js" type="text/javascript"></script>
+            <script src="../libraries/jqwidgets-ver4.1.2//jqwidgets/globalization/globalize.js"></script>
+            <script src="../libraries/jqwidgets-ver4.1.2/scripts/localization.js" type="text/javascript"></script>
+            
             <script>
                 $(document).ready(function(){
                     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered

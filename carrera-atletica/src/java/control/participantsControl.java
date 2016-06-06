@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.participantsModel;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -22,14 +23,15 @@ import model.participantsModel;
 public class participantsControl {
     public static void main(String[] args) {
         participantsModel dataParticipant = new participantsModel();
-        dataParticipant.setFl_age(0);
-        dataParticipant.setFl_cell_phone("7224122746");
-        System.out.println(new participantsControl().InsertParticipant(dataParticipant));
+        ArrayList<participantsModel> listParticipants = new participantsControl().SelectParticipants("allParticipants"); 
+        for(int i=0;i<listParticipants.size();i++){
+            System.err.println(listParticipants.get(i).getPk_participant());
+        }
     }
     private String procedure;
     public ArrayList<participantsModel> SelectParticipants(String action){
         ArrayList<participantsModel> list=new ArrayList<>();
-        procedure="";
+        procedure="CALL `GET_PARTICIPANS`('"+action+"', null)";
         try {
             try (Connection conn = new connectionControl().getConexion(); PreparedStatement ps = conn.prepareStatement(procedure); ResultSet res = ps.executeQuery()) {
                 while(res!=null&&res.next()){
@@ -46,7 +48,8 @@ public class participantsControl {
                     dataParticipants.setFl_distance(res.getInt("fl_distance"));                    
                     dataParticipants.setFl_category(res.getString("fl_category"));                    
                     dataParticipants.setFl_competitor_number(res.getInt("fl_competitor_number"));                    
-                    dataParticipants.setFl_ticket_number(res.getInt("fl_ticket_number"));                    
+                    dataParticipants.setFl_ticket_number(res.getInt("fl_ticket_number"));  
+                    dataParticipants.setFl_date_register(res.getString("fl_date_register"));
                     dataParticipants.setFl_size_tshirt(res.getString("fl_size_tshirt"));                    
                     dataParticipants.setFk_institution(res.getInt("fk_institution"));                    
                     dataParticipants.setFl_observations(res.getString("fl_observations"));
