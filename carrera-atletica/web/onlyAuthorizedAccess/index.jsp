@@ -84,17 +84,17 @@ if(session.getAttribute("userNameSystemUser") != null){%>
                                         <label for="data_name">Nombre *</label>
                                     </div>
                                     <div class="input-field col s4">
-                                        <input name="data_patern_name" type="text" class="validate" required="">
+                                        <input name="data_patern_name" type="text" class="validate">
                                         <label for="data_patern_name">Apellido paterno</label>
                                     </div>
                                     <div class="input-field col s4">
-                                        <input name="data_matern_name" type="text" class="validate" required="">
+                                        <input name="data_matern_name" type="text" class="validate">
                                         <label for="data_matern_name">Apellido materno</label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s6">
-                                        <input name="data_mail" type="email" class="validate">
+                                        <input name="data_mail" type="email" class="validate" required="">
                                         <label for="data_mail">E-mail</label>
                                     </div>
                                     <div class="input-field col s6">
@@ -119,7 +119,6 @@ if(session.getAttribute("userNameSystemUser") != null){%>
                                 <div class="row">
                                     <div class="input-field col s4">
                                         <select name="data_distance" required="">
-                                            <option value="3">3 Km</option>
                                             <option value="5" selected>5 Km</option>
                                         </select>
                                         <label for="data_distance">Distancia *</label>
@@ -262,7 +261,7 @@ if(session.getAttribute("userNameSystemUser") != null){%>
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s6">
-                                        <input placeholder=""  name="data_mail" type="email" class="validate">
+                                        <input placeholder=""  name="data_mail" type="email" class="validate" required="">
                                         <label for="data_mail">E-mail</label>
                                     </div>
                                     <div class="input-field col s6">
@@ -287,7 +286,6 @@ if(session.getAttribute("userNameSystemUser") != null){%>
                                 <div class="row">
                                     <div class="input-field col s4">
                                         <select name="data_distance" required="">
-                                            <option value="3">3 Km</option>
                                             <option value="5" selected>5 Km</option>
                                         </select>
                                         <label for="data_distance">Distancia *</label>
@@ -356,6 +354,11 @@ if(session.getAttribute("userNameSystemUser") != null){%>
                 <div style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); width: 80%" id="rowsParticipants" class="modal modal-fixed-footer">
                     <div class="teal darken-1" style="top: 0px; height: 32px; text-align: center">
                         <span class="header center white-text text-darken-2" style="font-size: 18px; font-weight: bolder">Participantes Inscritos a la Carrera</span>
+                    </div>
+                    <div style="padding: 20px">
+                        <span class="teal-text text-darken-2">Buscar </span>
+                        <input type=”text” id="searchInput" />
+                        <input type="button" value="Limpiar" id='clearButton' />
                     </div>
                     <div id="gridParticipants"></div>
                     <div class="modal-footer teal darken-1">
@@ -645,13 +648,18 @@ if(session.getAttribute("userNameSystemUser") != null){%>
             <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxscrollbar.js" type="text/javascript"></script>
             <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxmenu.js" type="text/javascript"></script>
             <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxlistbox.js" type="text/javascript"></script>
+            <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxinput.js" type="text/javascript"></script>
             <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxdropdownlist.js" type="text/javascript"></script>
             <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxgrid.js" type="text/javascript"></script>
             <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxgrid.sort.js" type="text/javascript"></script>
+            <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxgrid.edit.js" type="text/javascript"></script>
             <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxgrid.selection.js" type="text/javascript"></script>
+            <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxcheckbox.js" type="text/javascript"></script>
+            <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxgrid.filter.js" type="text/javascript"></script>
             <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxgrid.columnsresize.js" type="text/javascript"></script>
             <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxdata.js" type="text/javascript"></script>
             <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxdata.export.js" type="text/javascript"></script>
+            
             <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxgrid.export.js" type="text/javascript"></script>            
             <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxgrid.pager.js" type="text/javascript"></script>
             <script src="../libraries/jqwidgets-ver4.1.2/jqwidgets/jqxgrid.aggregates.js" type="text/javascript"></script>

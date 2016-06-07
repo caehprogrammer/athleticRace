@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="letterResponsive" pageWidth="612" pageHeight="792" columnWidth="542" leftMargin="28" rightMargin="42" topMargin="42" bottomMargin="28" uuid="c589d7cb-36b0-40de-bd25-6e0badeb34b0">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="11"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="pt_competitor_number" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -192,7 +192,7 @@ Hora de salida: 7:00 am
 				<text><![CDATA[Número de competidor: ]]></text>
 			</staticText>
 			<textField>
-				<reportElement stretchType="RelativeToBandHeight" x="40" y="122" width="502" height="16" uuid="4a87386a-9cde-4308-b927-88ec13f5957d"/>
+				<reportElement stretchType="RelativeToBandHeight" x="40" y="122" width="384" height="16" uuid="4a87386a-9cde-4308-b927-88ec13f5957d"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
 					<font fontName="SansSerif" size="9" isBold="false"/>
 				</textElement>
@@ -284,6 +284,26 @@ Hora de salida: 7:00 am
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fl_name}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="424" y="122" width="70" height="16" uuid="81ec9fe2-7514-4502-969a-98c87c245403"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recibí Playera:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="494" y="121" width="14" height="14" uuid="d91f2259-bbaf-49b9-bd33-94f348105adf"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
 		</band>
 	</detail>
 </jasperReport>

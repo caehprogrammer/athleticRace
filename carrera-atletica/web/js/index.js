@@ -44,7 +44,6 @@ $(document).ready(function (){
    $("#form-new-participant").on("submit", function (event){
         if($("input[name='data_date_born']").val().length>0){
             if(event.originalEvent){
-                
                 $.ajax({
                     async: true,
                     type: "POST",
@@ -238,7 +237,7 @@ $(document).ready(function (){
             datafields: [
                 { name: 'getPk_participant', type: 'int' },
                 { name: 'getFl_name', type: 'string' },
-                { name: 'getFl_patern_name', type: 'int' },
+                { name: 'getFl_patern_name', type: 'string' },
                 { name: 'getFl_matern_name', type: 'string' },
                 { name: 'getFl_mail', type: 'string' },
                 { name: 'getFl_cell_phone', type: 'string' },
@@ -252,11 +251,38 @@ $(document).ready(function (){
                 { name: 'getFl_date_register', type: 'string' },
                 { name: 'getFl_size_tshirt', type: 'string' },
                 { name: 'getFk_institution', type: 'string' },
-                { name: 'getFl_observations', type: 'string' }
+                { name: 'getFl_observations', type: 'string' },
+                { name: 'getFl_tshirt', type: 'bool' }
             ],
             root: "__ENTITIES",
             id: 'getPk_participant',
-            url: url
+            url: url,
+            updaterow: function (rowid, newdata, commit) {
+                // synchronize with the server - send update command
+                // call commit with parameter true if the synchronization with the server is successful 
+                // and with parameter false if the synchronization failed.
+                console.log(newdata);
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    datatype: "json",
+                    url: "/carrera-atletica/serviceParticipants?update",
+                    data: newdata,
+                    beforeSend: function (xhr) {
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert("Error interno del servidor");
+                    },
+                    success: function (data, textStatus, jqXHR) { 
+                        $(".loading").fadeOut();
+                        if(data.result==="Updated"){
+                            commit(true);                       
+                        }else{
+                            commit(false);   
+                        }
+                    }
+                });
+            }
         };
         return source;
     }
@@ -306,15 +332,14 @@ $(document).ready(function (){
         var dataAdapter = new $.jqx.dataAdapter(loadSource());
         $("#gridParticipants").jqxGrid({
             width: "99%",
-            height : "80%",
+            height : "70%",
             source: dataAdapter,                
             pageable: true,
             theme : "teal",
-            sortable: true,
             altrows: true,
             localization: getLocalization('es'),
             enabletooltips: true,
-            editable: false,
+            editable: true,
             showtoolbar: true,
             toolbarheight: 40,
             showaggregates: true,
@@ -323,6 +348,8 @@ $(document).ready(function (){
             showstatusbar: true,
             statusbarheight: 80,
             pagesize: 15,
+            filterable: false,
+            sortable: false,
             columns: [
                 { text: 'No. Competidor', datafield: 'getFl_competitor_number', width: 120, align: 'center', cellsalign: 'center',
                     aggregates: [
@@ -336,14 +363,14 @@ $(document).ready(function (){
                         }
                     ]
                 },
-                { text: 'Nombre', datafield: 'getFl_name', width: 150 },
-                { text: 'Apellido Paterno', datafield: 'getFl_patern_name', width: 150, align: 'center'},
-                { text: 'Apellido Paterno', datafield: 'getFl_matern_name', width: 150, align: 'center' },
-                { text: 'Correo Electrónico', datafield: 'getFl_mail', width: 230, align: 'center' },
-                { text: 'Número Teléfonico', datafield: 'getFl_cell_phone', width: 150, align: 'center', cellsalign: 'center'},
-                { text: 'Fecha de Nacimiento', datafield: 'getFl_date_born', width: 150, align: 'center', cellsalign: 'center'},
-                { text: 'Edad', datafield: 'getFl_age', width: 70, align: 'center', cellsalign: 'center'},
-                { text: 'Sexo', datafield: 'getFl_gender', width: 100, align: 'center', cellsalign: 'left',
+                { text: 'Nombre', editable: true, datafield: 'getFl_name', width: 150, align: 'center'},
+                { text: 'Apellido Paterno', editable: true, datafield: 'getFl_patern_name', width: 150, align: 'center'},
+                { text: 'Apellido Materno', editable: true, datafield: 'getFl_matern_name', width: 150, align: 'center' },
+                { text: 'Correo Electrónico', editable: true, datafield: 'getFl_mail', width: 230, align: 'center' },
+                { text: 'Número Teléfonico', editable: true, datafield: 'getFl_cell_phone', width: 150, align: 'center', cellsalign: 'center'},
+                { text: 'Fecha de Nacimiento', editable: false,  datafield: 'getFl_date_born', width: 150, align: 'center', cellsalign: 'center'},
+                { text: 'Edad', editable: false, datafield: 'getFl_age', width: 70, align: 'center', cellsalign: 'center'},
+                { text: 'Sexo', editable: false, datafield: 'getFl_gender', width: 100, align: 'center', cellsalign: 'left',
                     aggregates: [
                         {
                             '<b>Total</b>' : function (aggregatedValue, currentValue, column, record){
@@ -354,14 +381,14 @@ $(document).ready(function (){
                             }
                         },
                         { 'Hombres': function (aggregatedValue, currentValue) {
-                                if (currentValue === "Hombre") {
+                                if (currentValue === "Hombre" || currentValue === "HOMBRE") {
                                     return aggregatedValue + 1;
                                 }
                                 return aggregatedValue;
                             }
                         },
                         { 'Mujeres': function (aggregatedValue, currentValue) {
-                                if (currentValue === "Mujer") {
+                                if (currentValue === "Mujer" || currentValue === "MUJER") {
                                     return aggregatedValue + 1;
                                 }
                                 return aggregatedValue;
@@ -369,10 +396,10 @@ $(document).ready(function (){
                         }
                     ]
                 },
-                { text: 'Distancia', datafield: 'getFl_distance', width: 100, align: 'center', cellsalign: 'center'},
-                { text: 'Categoría', datafield: 'getFl_category', width: 100, align: 'center', cellsalign: 'center'},
+                { text: 'Distancia', editable: false, datafield: 'getFl_distance', width: 100, align: 'center', cellsalign: 'center'},
+                { text: 'Categoría', editable: false, datafield: 'getFl_category', width: 100, align: 'center', cellsalign: 'center'},
                 { text: 'Fecha de Registro', datafield: 'getFl_date_register', width: 120, align: 'center', cellsalign: 'center'},
-                { text: 'Playera', datafield: 'getFl_size_tshirt', width: 100, align: 'center', cellsalign: 'left',
+                { text: 'Playera', editable: false, datafield: 'getFl_size_tshirt', width: 100, align: 'center', cellsalign: 'left',
                     aggregates: [
                         {
                             '<b>Total</b>' : function (aggregatedValue, currentValue, column, record){
@@ -383,21 +410,21 @@ $(document).ready(function (){
                             }
                         },
                         { 'Chica': function (aggregatedValue, currentValue) {
-                                if (currentValue === "Chica") {
+                                if (currentValue === "Chica" || currentValue === "CHICA") {
                                     return aggregatedValue + 1;
                                 }
                                 return aggregatedValue;
                             }
                         },
                         { 'Mediana': function (aggregatedValue, currentValue) {
-                                if (currentValue === "Mediana") {
+                                if (currentValue === "Mediana" || currentValue === "MEDIANA") {
                                     return aggregatedValue + 1;
                                 }
                                 return aggregatedValue;
                             }
                         },
                         { 'Grande': function (aggregatedValue, currentValue) {
-                                if (currentValue === "Grande") {
+                                if (currentValue === "Grande" || currentValue === "GRANDE") {
                                     return aggregatedValue + 1;
                                 }
                                 return aggregatedValue;
@@ -405,12 +432,89 @@ $(document).ready(function (){
                         }
                     ]
                 },
-                { text: 'Institución', datafield: 'getFk_institution', width: 100, align: 'center', cellsalign: 'center'}
+                { text: 'Institución', editable: false, datafield: 'getFk_institution', width: 100, align: 'center', cellsalign: 'center'},
+                { text: 'Playera Entregada', editable: true, columntype: 'checkbox', datafield: 'getFl_tshirt', width: 150, align: 'center', cellsalign: 'center',
+                    aggregates: [
+                        {
+                            '<b>Total</b>' : function (aggregatedValue, currentValue, column, record){
+                                if (currentValue) {
+                                    return aggregatedValue + 1;
+                                }
+                                return aggregatedValue;   
+                            }
+                        },
+                        { 'Entregadas': function (aggregatedValue, currentValue) {
+                                if (currentValue) {
+                                    return aggregatedValue + 1;
+                                }
+                                return aggregatedValue;
+                            }
+                        },
+                        { 'No Entregadas': function (aggregatedValue, currentValue) {
+                                if (!currentValue) {
+                                    return aggregatedValue + 1;
+                                }
+                                return aggregatedValue;
+                            }
+                        }
+                    ]
+                }
             ]
+        });
+    }
+    var applyFilter = function (filtervalue) {
+        $("#gridParticipants").jqxGrid('clearfilters');
+        var filtertype = 'stringfilter';
+        var filtergroup = new $.jqx.filter();
+        var filter_or_operator = 1;
+        var filtervalue = filtervalue;
+        var filtercondition = 'equal';
+        var filter = filtergroup.createfilter(filtertype, filtervalue, filtercondition);
+        filtergroup.addfilter(filter_or_operator, filter);
+        // add the filters.
+        $("#gridParticipants").jqxGrid('addfilter', "getFl_competitor_number", filtergroup);
+        // apply the filters.
+        $("#gridParticipants").jqxGrid('applyfilters');
+    };
+    function searchInput(){
+        var dataAdapter = new $.jqx.dataAdapter(loadSource());
+        $("#searchInput").jqxInput({
+            theme : "teal",
+            source: dataAdapter, 
+            placeHolder: "No. Competidor", 
+            displayMember: "getFl_competitor_number", 
+            valueMember: "getFl_competitor_number", 
+            width: 100, 
+            height: 25
+        });
+        $("#searchInput").on('select', function (event) {
+            if (event.args) {
+                var item = event.args.item;
+                if (item) {
+                    $("#searchInput").jqxInput({disabled: true});
+                    $("#clearButton").jqxButton({ disabled: false });
+                    applyFilter(item.label);
+                }
+            }
+        });
+        $("#clearButton").jqxButton({ 
+            theme : "teal",
+            width: 120, 
+            height: 28,
+            disabled : true
+        });
+        $("#clearButton").on("click", function (){
+            if(!$("#clearButton").jqxButton('disabled')){
+                $("#searchInput").jqxInput({disabled: false});
+                $("#clearButton").jqxButton({ disabled: true });
+                $("#searchInput").val("");
+                $("#gridParticipants").jqxGrid('clearfilters');
+            }
         });
     }
     $("a[href='#rowsParticipants']").click(function (){
         loadGrid();
+        searchInput();
     });
 });
 

@@ -29,11 +29,12 @@ public class participantsModel {
     private String fl_size_tshirt = "";
     private Integer fk_institution = 0;
     private String fl_observations = "";    
+    private boolean fl_tshirt=false;
     
     public participantsModel() {
     }
 
-    public participantsModel(Integer pk_participant, String fl_name, String fl_patern_name, String fl_matern_name, String fl_mail, String fl_cell_phone, String fl_date_born, int fl_age, int fl_gender, int fl_distance, String fl_category, int fl_competitor_number, int fl_ticket_number, String fl_date_register, String fl_size_tshirt, Integer fk_institution, String fl_observations) {
+    public participantsModel(Integer pk_participant, String fl_name, String fl_patern_name, String fl_matern_name, String fl_mail, String fl_cell_phone, String fl_date_born, int fl_age, int fl_gender, int fl_distance, String fl_category, int fl_competitor_number, int fl_ticket_number, String fl_date_register, String fl_size_tshirt, Integer fk_institution, String fl_observations, boolean fl_tshirt) {
         this.pk_participant = pk_participant;
         this.fl_name = fl_name;
         this.fl_patern_name = fl_patern_name;
@@ -51,6 +52,7 @@ public class participantsModel {
         this.fl_size_tshirt = fl_size_tshirt;
         this.fk_institution = fk_institution;
         this.fl_observations = fl_observations;
+        this.fl_tshirt = fl_tshirt;
     }
 
     public Integer getPk_participant() {
@@ -189,30 +191,40 @@ public class participantsModel {
         this.fl_observations = fl_observations;
     }
 
+    public boolean getFl_tshirt() {
+        return fl_tshirt;
+    }
+
+    public void setFl_tshirt(boolean fl_tshirt) {
+        this.fl_tshirt = fl_tshirt;
+    }
+
     @Override
     public String toString() {
-        return "participantModel{" + "pk_participant=" + pk_participant + ", fl_name=" + fl_name + ", fl_patern_name=" + fl_patern_name + ", fl_matern_name=" + fl_matern_name + ", fl_mail=" + fl_mail + ", fl_cell_phone=" + fl_cell_phone + ", fl_date_born=" + fl_date_born + ", fl_age=" + fl_age + ", fl_gender=" + fl_gender + ", fl_distance=" + fl_distance + ", fl_category=" + fl_category + ", fl_competitor_number=" + fl_competitor_number + ", fl_ticket_number=" + fl_ticket_number + ", fl_date_register=" + fl_date_register + ", fl_size_tshirt=" + fl_size_tshirt + ", fk_institution=" + fk_institution + ", fl_observations=" + fl_observations + '}';
+        return "participantsModel{" + "pk_participant=" + pk_participant + ", fl_name=" + fl_name + ", fl_patern_name=" + fl_patern_name + ", fl_matern_name=" + fl_matern_name + ", fl_mail=" + fl_mail + ", fl_cell_phone=" + fl_cell_phone + ", fl_date_born=" + fl_date_born + ", fl_age=" + fl_age + ", fl_gender=" + fl_gender + ", fl_distance=" + fl_distance + ", fl_category=" + fl_category + ", fl_competitor_number=" + fl_competitor_number + ", fl_ticket_number=" + fl_ticket_number + ", fl_date_register=" + fl_date_register + ", fl_size_tshirt=" + fl_size_tshirt + ", fk_institution=" + fk_institution + ", fl_observations=" + fl_observations + ", fl_tshirt=" + fl_tshirt + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 43 * hash + Objects.hashCode(this.pk_participant);
-        hash = 43 * hash + Objects.hashCode(this.fl_name);
-        hash = 43 * hash + Objects.hashCode(this.fl_patern_name);
-        hash = 43 * hash + Objects.hashCode(this.fl_matern_name);
-        hash = 43 * hash + Objects.hashCode(this.fl_mail);
-        hash = 43 * hash + Objects.hashCode(this.fl_cell_phone);
-        hash = 43 * hash + Objects.hashCode(this.fl_date_born);
-        hash = 43 * hash + this.fl_age;
-        hash = 43 * hash + this.fl_gender;
-        hash = 43 * hash + Objects.hashCode(this.fl_category);
-        hash = 43 * hash + this.fl_competitor_number;
-        hash = 43 * hash + this.fl_ticket_number;
-        hash = 43 * hash + Objects.hashCode(this.fl_date_register);
-        hash = 43 * hash + Objects.hashCode(this.fl_size_tshirt);
-        hash = 43 * hash + Objects.hashCode(this.fk_institution);
-        hash = 43 * hash + Objects.hashCode(this.fl_observations);
+        hash = 79 * hash + Objects.hashCode(this.pk_participant);
+        hash = 79 * hash + Objects.hashCode(this.fl_name);
+        hash = 79 * hash + Objects.hashCode(this.fl_patern_name);
+        hash = 79 * hash + Objects.hashCode(this.fl_matern_name);
+        hash = 79 * hash + Objects.hashCode(this.fl_mail);
+        hash = 79 * hash + Objects.hashCode(this.fl_cell_phone);
+        hash = 79 * hash + Objects.hashCode(this.fl_date_born);
+        hash = 79 * hash + this.fl_age;
+        hash = 79 * hash + this.fl_gender;
+        hash = 79 * hash + this.fl_distance;
+        hash = 79 * hash + Objects.hashCode(this.fl_category);
+        hash = 79 * hash + this.fl_competitor_number;
+        hash = 79 * hash + this.fl_ticket_number;
+        hash = 79 * hash + Objects.hashCode(this.fl_date_register);
+        hash = 79 * hash + Objects.hashCode(this.fl_size_tshirt);
+        hash = 79 * hash + Objects.hashCode(this.fk_institution);
+        hash = 79 * hash + Objects.hashCode(this.fl_observations);
+        hash = 79 * hash + Objects.hashCode(this.fl_tshirt);
         return hash;
     }
 
@@ -267,7 +279,13 @@ public class participantsModel {
         if (!Objects.equals(this.fl_date_register, other.fl_date_register)) {
             return false;
         }
+        if (!Objects.equals(this.fl_size_tshirt, other.fl_size_tshirt)) {
+            return false;
+        }
         if (!Objects.equals(this.fl_observations, other.fl_observations)) {
+            return false;
+        }
+        if (!Objects.equals(this.fl_tshirt, other.fl_tshirt)) {
             return false;
         }
         if (!Objects.equals(this.pk_participant, other.pk_participant)) {
@@ -278,4 +296,7 @@ public class participantsModel {
         }
         return true;
     }
+    
+    
+   
 }

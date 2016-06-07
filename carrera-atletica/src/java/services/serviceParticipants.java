@@ -156,6 +156,7 @@ public class serviceParticipants extends HttpServlet {
                 String fl_size_tshirt;
                 Integer fk_institution;
                 String fl_observations;
+                boolean fl_tshirt = false;
                 
                 if(request.getParameter("select")!=null){
                     ArrayList<participantsModel> listParticipants;
@@ -163,27 +164,37 @@ public class serviceParticipants extends HttpServlet {
                     JSONObject settings = new JSONObject();
                     JSONArray content = new JSONArray();
                     settings.put("__participantsModel","Participants");
-                    String gender, distance, institution="";
+                    String gender, distance, institution="", competitorNumber;
                     if(request.getParameter("select").equals("one")){
                         int pt_competitor_number = Integer.parseInt(request.getParameter("pt_competitor_number"));
                         listParticipants = new participantsControl().SelectParticipant(pt_competitor_number);
                         institution = "one";
                     }else{
-                        listParticipants = new participantsControl().SelectParticipants("allParticipants"); 
-                        
-                        
+                        listParticipants = new participantsControl().SelectParticipants("allParticipants");  
                     }
                     for(int i=0;i<listParticipants.size();i++){
                         
                         if(listParticipants.get(i).getFl_gender()==1){
-                            gender="Hombre";
+                            if(institution.equals("one")){
+                                gender="Hombre";
+                            }else{
+                                gender="HOMBRE";
+                            }
                         }else{
-                            gender="Mujer";
+                            if(institution.equals("one")){
+                                gender="MUJER";
+                            }else{
+                                gender="MUJER";
+                            }
                         }
                         if(listParticipants.get(i).getFl_distance()==3){
                             distance="3 Km";
                         }else{
-                            distance="5 Km";
+                            if(institution.equals("one")){
+                                distance="5 Km";
+                            }else{
+                                distance="5 KM";
+                            }
                         }
                         if(listParticipants.get(i).getFk_institution()==1){
                             if(distance.equals("one")){
@@ -191,6 +202,15 @@ public class serviceParticipants extends HttpServlet {
                             }else{
                                 institution="UTSEM";
                             }
+                        }
+                        if(listParticipants.get(i).getFl_competitor_number()>=1 && listParticipants.get(i).getFl_competitor_number()<=9){
+                            competitorNumber = "000"+listParticipants.get(i).getFl_competitor_number();
+                        }else if(listParticipants.get(i).getFl_competitor_number()>=10 && listParticipants.get(i).getFl_competitor_number()<=99){
+                            competitorNumber = "00"+listParticipants.get(i).getFl_competitor_number();
+                        }else if(listParticipants.get(i).getFl_competitor_number()>=100 && listParticipants.get(i).getFl_competitor_number()<=999){
+                            competitorNumber = "0"+listParticipants.get(i).getFl_competitor_number();
+                        }else {
+                            competitorNumber = ""+listParticipants.get(i).getFl_competitor_number();
                         }
                         JSONObject data = new JSONObject();
                         data.put("getProgresivNumber", i+1);
@@ -205,12 +225,13 @@ public class serviceParticipants extends HttpServlet {
                         data.put("getFl_gender", gender );
                         data.put("getFl_distance", distance );
                         data.put("getFl_category", listParticipants.get(i).getFl_category() );
-                        data.put("getFl_competitor_number", listParticipants.get(i).getFl_competitor_number() );        
-                        data.put("getFl_ticket_number", listParticipants.get(i).getFl_ticket_number() );      
+                        data.put("getFl_competitor_number", competitorNumber );        
+                        data.put("getFl_ticket_number", competitorNumber );      
                         data.put("getFl_date_register", listParticipants.get(i).getFl_date_register() );
                         data.put("getFl_size_tshirt", listParticipants.get(i).getFl_size_tshirt() );
                         data.put("getFk_institution", institution );
-                        data.put("getFl_observations", listParticipants.get(i).getFl_observations());        
+                        data.put("getFl_observations", listParticipants.get(i).getFl_observations());
+                        data.put("getFl_tshirt", listParticipants.get(i).getFl_tshirt());
                         content.add(data); 
                     }
                     settings.put("__ENTITIES", content);
@@ -240,6 +261,7 @@ public class serviceParticipants extends HttpServlet {
                         fl_size_tshirt = request.getParameter("data_size_tshirt");
                         fk_institution = Integer.parseInt(request.getParameter("data_fk_institution"));
                         fl_observations = request.getParameter("data_observations");
+                        
 
 //                        dataParticipants.setPk_participant(pk_participant);
                         dataParticipants.setFl_name(fl_name);
@@ -257,6 +279,7 @@ public class serviceParticipants extends HttpServlet {
                         dataParticipants.setFl_size_tshirt(fl_size_tshirt);                    
                         dataParticipants.setFk_institution(fk_institution);                    
                         dataParticipants.setFl_observations(fl_observations);
+                        dataParticipants.setFl_tshirt(fl_tshirt);
 
                         dataOut.put("result", new participantsControl().InsertParticipant(dataParticipants));    
                     } catch (Exception e) {
@@ -264,46 +287,52 @@ public class serviceParticipants extends HttpServlet {
                     }              
                     out.print(dataOut);
                 }
-                if(request.getParameter("update")!=null){      
-                    if(request.getParameter("pt_Pk_participant") != null){
-                        participantsModel dataParticipants=new participantsModel();
-                        pk_participant = Integer.parseInt(request.getParameter("data_pk_participant"));
-                        fl_name = request.getParameter("data_name");
-                        fl_patern_name = request.getParameter("data_patern_name");
-                        fl_matern_name = request.getParameter("data_matern_name");
-                        fl_mail = request.getParameter("data_mail");
-                        fl_cell_phone = request.getParameter("data_cell_phone");
-                        fl_date_born = convertDate(request.getParameter("data_date_born"));
-                        fl_age = Integer.parseInt(request.getParameter("data_age"));
-                        fl_gender = Integer.parseInt(request.getParameter("data_gender"));
-                        fl_distance = Integer.parseInt(request.getParameter("data_distance"));
-                        fl_category = request.getParameter("data_category");
-//                        fl_competitor_number = Integer.parseInt(request.getParameter("data_competitor_number"));
-//                        fl_ticket_number = Integer.parseInt(request.getParameter("data_ticket_number"));
-                        fl_size_tshirt = request.getParameter("data_size_tshirt");
-                        fk_institution = Integer.parseInt(request.getParameter("data_fk_institution"));
-                        fl_observations = request.getParameter("data_observations");
-                        
-                        dataParticipants.setPk_participant(pk_participant);
-                        dataParticipants.setFl_name(fl_name);
-                        dataParticipants.setFl_patern_name(fl_patern_name);                    
-                        dataParticipants.setFl_matern_name(fl_matern_name);                    
-                        dataParticipants.setFl_mail(fl_mail);                    
-                        dataParticipants.setFl_cell_phone(fl_cell_phone);                    
-                        dataParticipants.setFl_date_born(fl_date_born);
-                        dataParticipants.setFl_age(fl_age);                    
-                        dataParticipants.setFl_gender(fl_gender);                    
-                        dataParticipants.setFl_distance(fl_distance);                    
-                        dataParticipants.setFl_category(fl_category);                    
-//                        dataParticipants.setFl_competitor_number(fl_competitor_number);                    
-//                        dataParticipants.setFl_ticket_number(fl_ticket_number);                    
-                        dataParticipants.setFl_size_tshirt(fl_size_tshirt);                    
-                        dataParticipants.setFk_institution(fk_institution);                    
-                        dataParticipants.setFl_observations(fl_observations);
-                        
-                        dataOut.put("result", new participantsControl().UpdateParticipant(dataParticipants));
-                        out.print(dataOut);  
-                    }                
+                if(request.getParameter("update")!=null){  
+                    try {
+                        if(request.getParameter("getPk_participant") != null){
+                            participantsModel dataParticipants=new participantsModel();
+                            pk_participant = Integer.parseInt(request.getParameter("getPk_participant"));
+                            fl_name = request.getParameter("getFl_name");
+                            fl_patern_name = request.getParameter("getFl_patern_name");
+                            fl_matern_name = request.getParameter("getFl_matern_name");
+                            fl_mail = request.getParameter("getFl_mail");
+                            fl_cell_phone = request.getParameter("getFl_cell_phone");
+//                            fl_date_born = convertDate(request.getParameter("getFl_date_born"));
+//                            fl_age = Integer.parseInt(request.getParameter("getFl_age"));
+//                            fl_gender = request.getParameter("getFl_gender");
+//                            fl_distance = request.getParameter("getFl_distance");
+                            fl_category = request.getParameter("getFl_category");
+    //                        fl_competitor_number = Integer.parseInt(request.getParameter("getFl_competitor_number"));
+    //                        fl_ticket_number = Integer.parseInt(request.getParameter("getFl_ticket_number"));
+    //                        fl_size_tshirt = request.getParameter("getFl_size_tshirt");
+//                            fk_institution = Integer.parseInt(request.getParameter("getFk_institution"));
+//                            fl_observations = request.getParameter("getFl_observations");
+                            fl_tshirt = Boolean.parseBoolean(request.getParameter("getFl_tshirt"));
+
+                            dataParticipants.setPk_participant(pk_participant);
+                            dataParticipants.setFl_name(fl_name);
+                            dataParticipants.setFl_patern_name(fl_patern_name);                    
+                            dataParticipants.setFl_matern_name(fl_matern_name);                    
+                            dataParticipants.setFl_mail(fl_mail);                    
+                            dataParticipants.setFl_cell_phone(fl_cell_phone);                    
+//                            dataParticipants.setFl_date_born(fl_date_born);
+//                            dataParticipants.setFl_age(fl_age);                    
+//                            dataParticipants.setFl_gender(fl_gender);                    
+//                            dataParticipants.setFl_distance(fl_distance);                    
+                            dataParticipants.setFl_category(fl_category);                    
+    //                        dataParticipants.setFl_competitor_number(fl_competitor_number);                    
+    //                        dataParticipants.setFl_ticket_number(fl_ticket_number);                    
+    //                        dataParticipants.setFl_size_tshirt(fl_size_tshirt);                    
+//                            dataParticipants.setFk_institution(fk_institution);                    
+//                            dataParticipants.setFl_observations(fl_observations);
+                            dataParticipants.setFl_tshirt(fl_tshirt);
+
+                            dataOut.put("result", new participantsControl().UpdateParticipant(dataParticipants));   
+                        }    
+                    } catch (Exception e) {
+                        dataOut.put("result",""+e+"");
+                    }     
+                    out.print(dataOut); 
                 }
                 if(request.getParameter("delete")!=null){     
                     if(request.getParameter("pt_Pk_participant") != null){                        

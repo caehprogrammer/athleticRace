@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.participantsModel;
-import org.json.simple.JSONObject;
 
 /**
  *
@@ -25,7 +24,7 @@ public class participantsControl {
         participantsModel dataParticipant = new participantsModel();
         ArrayList<participantsModel> listParticipants = new participantsControl().SelectParticipants("allParticipants"); 
         for(int i=0;i<listParticipants.size();i++){
-            System.err.println(listParticipants.get(i).getPk_participant());
+            System.err.println(listParticipants.get(i).getFl_tshirt());
         }
     }
     private String procedure;
@@ -53,6 +52,7 @@ public class participantsControl {
                     dataParticipants.setFl_size_tshirt(res.getString("fl_size_tshirt"));                    
                     dataParticipants.setFk_institution(res.getInt("fk_institution"));                    
                     dataParticipants.setFl_observations(res.getString("fl_observations"));
+                    dataParticipants.setFl_tshirt(res.getBoolean("fl_tshirt"));
                     list.add(dataParticipants);
                 }
                 res.close();
@@ -88,6 +88,7 @@ public class participantsControl {
                     dataParticipants.setFl_size_tshirt(res.getString("fl_size_tshirt"));                    
                     dataParticipants.setFk_institution(res.getInt("fk_institution"));                    
                     dataParticipants.setFl_observations(res.getString("fl_observations"));
+                    dataParticipants.setFl_tshirt(res.getBoolean("fl_tshirt"));
                     list.add(dataParticipants);
                 }
                 res.close();
@@ -103,7 +104,7 @@ public class participantsControl {
     
     public String InsertParticipant(participantsModel dataParticipant){
         String request;
-        procedure="CALL `SET_PASRTICIPANT`(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        procedure="CALL `SET_PASRTICIPANT`(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, null)";
         try {
             Connection conn=new connectionControl().getConexion();
             try (PreparedStatement ps = conn.prepareStatement(procedure)) {
@@ -137,7 +138,7 @@ public class participantsControl {
     }
     public String UpdateParticipant(participantsModel dataParticipant){
         String request;
-        procedure="CALL `SET_PASRTICIPANT`(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        procedure="CALL `SET_PASRTICIPANT`(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             Connection conn=new connectionControl().getConexion();
             try (PreparedStatement ps = conn.prepareStatement(procedure)) {
@@ -158,6 +159,7 @@ public class participantsControl {
                 ps.setString(15, dataParticipant.getFl_size_tshirt() );
                 ps.setInt(16, dataParticipant.getFk_institution() );
                 ps.setString(17, dataParticipant.getFl_observations() );
+                ps.setBoolean(18, dataParticipant.getFl_tshirt() );
                 ps.executeUpdate();
                 request="Updated";
                 ps.close();
@@ -171,7 +173,7 @@ public class participantsControl {
     }
     public String DeleteParticipant(int pkParticipant){
         String request;
-        procedure="CALL `SET_PASRTICIPANT`('delete', "+pkParticipant+", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)";
+        procedure="CALL `SET_PASRTICIPANT`('delete', "+pkParticipant+", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)";
         try {
             Connection conn=new connectionControl().getConexion();
             try (PreparedStatement ps = conn.prepareStatement(procedure)) {
